@@ -3,7 +3,7 @@
 # We've included some commented out config examples here.
 
 service: meusick-api-node
-#app and org for use with dashboard.serverless.com
+# app and org for use with dashboard.serverless.com
 #app: your-app-name
 #org: your-org-name
 
@@ -15,6 +15,7 @@ provider:
   name: aws
   runtime: nodejs12.x
   lambdaHashingVersion: 20201221
+  # region: us-west-2
   # Policies:
   #   - AWSLambdaExecute
   #   - Version: '2012-10-17' 
@@ -24,8 +25,8 @@ provider:
   #           - s3:GetObject
   #           - s3:GetObjectACL
   #         Resource: 'arn:aws:s3:::meusick-bucket'
-  iamManagedPolicies: 
-    - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+  # iamManagedPolicies: 
+  #   - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
   # iamRoleStatements:
   #   - Effect: 'Allow'
   #     Action:
@@ -62,6 +63,7 @@ plugins:
   - serverless-offline
   - serverless-express
   - serverless-wsgi
+  - serverless-iam-roles-per-function
 
 functions:
   hello:
@@ -70,8 +72,25 @@ functions:
       - httpApi:
           path: /ex
           method: get
+
   s3file:
     handler: handlerS3.hello
+    iamRoleStatements:
+      - Effect: 'Allow'
+        Action:
+          - 's3:ListBucket'
+        Resource: "arn:aws:s3:::meusick-bucket"
+
+      # - Effect: 'Allow'
+      #   Action:
+      #     - 's3:GetObject'
+      #   Resource: "arn:aws:s3:::meusick-bucket"
+
+      - Effect: 'Allow'
+        Action:
+          - 's3:ListObjects'
+        Resource: "arn:aws:s3:::meusick-bucket"
+
     events:
       - httpApi:
           path: /s3file

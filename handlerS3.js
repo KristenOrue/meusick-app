@@ -1,9 +1,12 @@
 const AWS = require('aws-sdk');
+const express = require('express');
 
-var s3 = new AWS.S3();
+const BUCKET = 'meusick-bucket';
+const s3 = new AWS.S3();
+
 module.exports.hello = (event, context, callback) => {
     const params = {
-  "Bucket": 'meusick-bucket'
+  "Bucket": BUCKET,
     };
     s3.listObjects(params, function(err, data){
        if(err) {
@@ -24,6 +27,15 @@ module.exports.hello = (event, context, callback) => {
     }
     });
 };
+
+
+
+
+
+
+
+
+
 
 // app.use(bodyParser.json());
 

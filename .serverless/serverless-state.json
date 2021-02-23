@@ -8,9 +8,6 @@
       "name": "aws",
       "runtime": "nodejs12.x",
       "lambdaHashingVersion": "20201221",
-      "iamManagedPolicies": [
-        "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
-      ],
       "stage": "dev",
       "variableSyntax": "\\${([^{}:]+?(?:\\(|:)(?:[^:{}][^{}]*?)?)}",
       "region": "us-east-1",
@@ -183,10 +180,7 @@
                     "lambdaRole"
                   ]
                 ]
-              },
-              "ManagedPolicyArns": [
-                "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
-              ]
+              }
             }
           },
           "HelloLambdaFunction": {
@@ -196,7 +190,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/meusick-api-node/dev/1614047894553-2021-02-23T02:38:14.553Z/meusick-api-node.zip"
+                "S3Key": "serverless/meusick-api-node/dev/1614060351571-2021-02-23T06:05:51.571Z/meusick-api-node.zip"
               },
               "Handler": "handler.api",
               "Runtime": "nodejs12.x",
@@ -226,7 +220,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/meusick-api-node/dev/1614047894553-2021-02-23T02:38:14.553Z/meusick-api-node.zip"
+                "S3Key": "serverless/meusick-api-node/dev/1614060351571-2021-02-23T06:05:51.571Z/meusick-api-node.zip"
               },
               "Handler": "handlerS3.hello",
               "Runtime": "nodejs12.x",
@@ -240,12 +234,13 @@
               },
               "Role": {
                 "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
+                  "S3fileIamRoleLambdaExecution",
                   "Arn"
                 ]
               }
             },
             "DependsOn": [
+              "S3fileIamRoleLambdaExecution",
               "S3fileLogGroup"
             ]
           },
@@ -256,7 +251,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/meusick-api-node/dev/1614047894553-2021-02-23T02:38:14.553Z/meusick-api-node.zip"
+                "S3Key": "serverless/meusick-api-node/dev/1614060351571-2021-02-23T06:05:51.571Z/meusick-api-node.zip"
               },
               "Handler": "handler_py.heller",
               "Runtime": "python3.8",
@@ -279,34 +274,34 @@
               "HellerLogGroup"
             ]
           },
-          "HelloLambdaVersionKy2vCPom6CdjmWoFNlJAK5bLJ5bEy13D96cQrGHNuE": {
+          "HelloLambdaVersionNS6zZYkfMEq8VeiNZAyzEfKNmQXBfROuOGGGNxraHuo": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HelloLambdaFunction"
               },
-              "CodeSha256": "pJcXRQJOJDc5WY+DzVfTDloXIyeo1rG9k1FDyC/ALLc="
+              "CodeSha256": "jAv7BdpQyODyJ1LNNxdFmyjRuetfKXZBOP8oNd2qh/w="
             }
           },
-          "S3fileLambdaVersionCAyLliCqzfgf5oxW9EJbcivW8k9J0jSPuj16Hlj6h4": {
+          "S3fileLambdaVersionAxz0VioKIF8DvWXiZtQ2Lew2RT93WhQnymyHCHteIvc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "S3fileLambdaFunction"
               },
-              "CodeSha256": "pJcXRQJOJDc5WY+DzVfTDloXIyeo1rG9k1FDyC/ALLc="
+              "CodeSha256": "jAv7BdpQyODyJ1LNNxdFmyjRuetfKXZBOP8oNd2qh/w="
             }
           },
-          "HellerLambdaVersionUoZ1dqIul5ph6OeUZhHX1pUmzIvhru6yDuM7vRc8Ik": {
+          "HellerLambdaVersionftM2sCC6DF90rgm6p9XdSNmeq2vk6jOx5IKPc33OWQ": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HellerLambdaFunction"
               },
-              "CodeSha256": "pJcXRQJOJDc5WY+DzVfTDloXIyeo1rG9k1FDyC/ALLc="
+              "CodeSha256": "jAv7BdpQyODyJ1LNNxdFmyjRuetfKXZBOP8oNd2qh/w="
             }
           },
           "HttpApi": {
@@ -544,6 +539,89 @@
               }
             },
             "DependsOn": "HttpApiIntegrationHeller"
+          },
+          "S3fileIamRoleLambdaExecution": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+              "AssumeRolePolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Principal": {
+                      "Service": [
+                        "lambda.amazonaws.com"
+                      ]
+                    },
+                    "Action": [
+                      "sts:AssumeRole"
+                    ]
+                  }
+                ]
+              },
+              "Policies": [
+                {
+                  "PolicyName": {
+                    "Fn::Join": [
+                      "-",
+                      [
+                        "meusick-api-node",
+                        "dev",
+                        "lambda"
+                      ]
+                    ]
+                  },
+                  "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "logs:CreateLogStream",
+                          "logs:CreateLogGroup",
+                          "logs:PutLogEvents"
+                        ],
+                        "Resource": [
+                          {
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/meusick-api-node-dev-s3file:*:*"
+                          }
+                        ]
+                      },
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "s3:ListBucket"
+                        ],
+                        "Resource": "arn:aws:s3:::meusick-bucket"
+                      },
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "s3:ListObjects"
+                        ],
+                        "Resource": "arn:aws:s3:::meusick-bucket"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "Path": "/",
+              "RoleName": {
+                "Fn::Join": [
+                  "-",
+                  [
+                    "meusick-api-node",
+                    "dev",
+                    "s3file",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    "lambdaRole"
+                  ]
+                ]
+              },
+              "ManagedPolicyArns": []
+            }
           }
         },
         "Outputs": {
@@ -555,19 +633,19 @@
           "HelloLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HelloLambdaVersionKy2vCPom6CdjmWoFNlJAK5bLJ5bEy13D96cQrGHNuE"
+              "Ref": "HelloLambdaVersionNS6zZYkfMEq8VeiNZAyzEfKNmQXBfROuOGGGNxraHuo"
             }
           },
           "S3fileLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "S3fileLambdaVersionCAyLliCqzfgf5oxW9EJbcivW8k9J0jSPuj16Hlj6h4"
+              "Ref": "S3fileLambdaVersionAxz0VioKIF8DvWXiZtQ2Lew2RT93WhQnymyHCHteIvc"
             }
           },
           "HellerLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HellerLambdaVersionUoZ1dqIul5ph6OeUZhHX1pUmzIvhru6yDuM7vRc8Ik"
+              "Ref": "HellerLambdaVersionftM2sCC6DF90rgm6p9XdSNmeq2vk6jOx5IKPc33OWQ"
             }
           },
           "HttpApiId": {
@@ -687,7 +765,8 @@
     "plugins": [
       "serverless-offline",
       "serverless-express",
-      "serverless-wsgi"
+      "serverless-wsgi",
+      "serverless-iam-roles-per-function"
     ],
     "pluginsData": {},
     "functions": {
@@ -709,10 +788,18 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "HelloLambdaVersionKy2vCPom6CdjmWoFNlJAK5bLJ5bEy13D96cQrGHNuE"
+        "versionLogicalId": "HelloLambdaVersionNS6zZYkfMEq8VeiNZAyzEfKNmQXBfROuOGGGNxraHuo"
       },
       "s3file": {
         "handler": "handlerS3.hello",
+        "iamRoleStatements": [
+          {
+            "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"S3fileIamRoleLambdaExecution\"][\"Properties\"][\"Policies\"][0][\"PolicyDocument\"][\"Statement\"][1]"
+          },
+          {
+            "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"S3fileIamRoleLambdaExecution\"][\"Properties\"][\"Policies\"][0][\"PolicyDocument\"][\"Statement\"][2]"
+          }
+        ],
         "events": [
           {
             "httpApi": {
@@ -729,7 +816,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "S3fileLambdaVersionCAyLliCqzfgf5oxW9EJbcivW8k9J0jSPuj16Hlj6h4"
+        "versionLogicalId": "S3fileLambdaVersionAxz0VioKIF8DvWXiZtQ2Lew2RT93WhQnymyHCHteIvc"
       },
       "heller": {
         "runtime": "python3.8",
@@ -749,7 +836,7 @@
         "memory": 1024,
         "timeout": 6,
         "vpc": {},
-        "versionLogicalId": "HellerLambdaVersionUoZ1dqIul5ph6OeUZhHX1pUmzIvhru6yDuM7vRc8Ik"
+        "versionLogicalId": "HellerLambdaVersionftM2sCC6DF90rgm6p9XdSNmeq2vk6jOx5IKPc33OWQ"
       }
     },
     "configValidationMode": "warn",
@@ -774,7 +861,7 @@
     "artifact": "/Users/kristenorue/Documents/cs493/AWS-SAM-NODE/meusick-api/.serverless/meusick-api-node.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/meusick-api-node/dev/1614047894553-2021-02-23T02:38:14.553Z",
+    "artifactDirectoryName": "serverless/meusick-api-node/dev/1614060351571-2021-02-23T06:05:51.571Z",
     "artifact": "meusick-api-node.zip"
   }
 }
