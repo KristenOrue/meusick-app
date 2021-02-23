@@ -12,13 +12,23 @@ module.exports.hello = (event, context, callback) => {
            let response = {
         "statusCode": 200,
         "headers": {
-            "my_header": "my_value"
+            "my_header": "my_value",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": true,
         },
-        "body": JSON.stringify(data),
+        "body": JSON.stringify(data.Contents, ['Key']),
         "isBase64Encoded": false
+        
     };
            callback(null, response);
     }
     });
-    
 };
+
+// app.use(bodyParser.json());
+
+// app.get('/genres', function (req, res) {
+//     const params = {
+//         TableName : MUSIC_TABLE,
+//         AttributesToGet: ['genre']
+//     };
