@@ -173,7 +173,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1614060351571-2021-02-23T06:05:51.571Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1614142357263-2021-02-24T04:52:37.263Z/meusick-api-node.zip"
         },
         "Handler": "handler.api",
         "Runtime": "nodejs12.x",
@@ -203,7 +203,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1614060351571-2021-02-23T06:05:51.571Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1614142357263-2021-02-24T04:52:37.263Z/meusick-api-node.zip"
         },
         "Handler": "handlerS3.hello",
         "Runtime": "nodejs12.x",
@@ -234,7 +234,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1614060351571-2021-02-23T06:05:51.571Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1614142357263-2021-02-24T04:52:37.263Z/meusick-api-node.zip"
         },
         "Handler": "handler_py.heller",
         "Runtime": "python3.8",
@@ -257,34 +257,34 @@
         "HellerLogGroup"
       ]
     },
-    "HelloLambdaVersionNS6zZYkfMEq8VeiNZAyzEfKNmQXBfROuOGGGNxraHuo": {
+    "HelloLambdaVersionCfZtncJgLHmL96RR533J5qMNsy6izym6wzSJzeuA": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HelloLambdaFunction"
         },
-        "CodeSha256": "jAv7BdpQyODyJ1LNNxdFmyjRuetfKXZBOP8oNd2qh/w="
+        "CodeSha256": "JKE069wkH3mejm+esjoDvqHsQemIwue7tOpaoLhPup4="
       }
     },
-    "S3fileLambdaVersionAxz0VioKIF8DvWXiZtQ2Lew2RT93WhQnymyHCHteIvc": {
+    "S3fileLambdaVersionHX1y9bWyQRPIhkHQOS7WzELmMS3I0QGnI3MCRwwo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "S3fileLambdaFunction"
         },
-        "CodeSha256": "jAv7BdpQyODyJ1LNNxdFmyjRuetfKXZBOP8oNd2qh/w="
+        "CodeSha256": "JKE069wkH3mejm+esjoDvqHsQemIwue7tOpaoLhPup4="
       }
     },
-    "HellerLambdaVersionftM2sCC6DF90rgm6p9XdSNmeq2vk6jOx5IKPc33OWQ": {
+    "HellerLambdaVersionVO8abNHjZExSyfHp9Cmbsa7iHLD9mTozbqofpRnQ0ac": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HellerLambdaFunction"
         },
-        "CodeSha256": "jAv7BdpQyODyJ1LNNxdFmyjRuetfKXZBOP8oNd2qh/w="
+        "CodeSha256": "JKE069wkH3mejm+esjoDvqHsQemIwue7tOpaoLhPup4="
       }
     },
     "HttpApi": {
@@ -589,7 +589,28 @@
                 {
                   "Effect": "Allow",
                   "Action": [
+                    "s3:GetObject"
+                  ],
+                  "Resource": "arn:aws:s3:::meusick-bucket"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
                     "s3:ListObjects"
+                  ],
+                  "Resource": "arn:aws:s3:::meusick-bucket"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:PutObjectACL"
+                  ],
+                  "Resource": "arn:aws:s3:::meusick-bucket"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObjectACL"
                   ],
                   "Resource": "arn:aws:s3:::meusick-bucket"
                 }
@@ -625,19 +646,19 @@
     "HelloLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HelloLambdaVersionNS6zZYkfMEq8VeiNZAyzEfKNmQXBfROuOGGGNxraHuo"
+        "Ref": "HelloLambdaVersionCfZtncJgLHmL96RR533J5qMNsy6izym6wzSJzeuA"
       }
     },
     "S3fileLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "S3fileLambdaVersionAxz0VioKIF8DvWXiZtQ2Lew2RT93WhQnymyHCHteIvc"
+        "Ref": "S3fileLambdaVersionHX1y9bWyQRPIhkHQOS7WzELmMS3I0QGnI3MCRwwo"
       }
     },
     "HellerLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HellerLambdaVersionftM2sCC6DF90rgm6p9XdSNmeq2vk6jOx5IKPc33OWQ"
+        "Ref": "HellerLambdaVersionVO8abNHjZExSyfHp9Cmbsa7iHLD9mTozbqofpRnQ0ac"
       }
     },
     "HttpApiId": {

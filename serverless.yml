@@ -15,49 +15,7 @@ provider:
   name: aws
   runtime: nodejs12.x
   lambdaHashingVersion: 20201221
-  # region: us-west-2
-  # Policies:
-  #   - AWSLambdaExecute
-  #   - Version: '2012-10-17' 
-  #     Statement:
-  #       - Effect: Allow
-  #         Action:
-  #           - s3:GetObject
-  #           - s3:GetObjectACL
-  #         Resource: 'arn:aws:s3:::meusick-bucket'
-  # iamManagedPolicies: 
-  #   - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
-  # iamRoleStatements:
-  #   - Effect: 'Allow'
-  #     Action:
-  #       - 's3:ListBucket'
-  #     Resource:
-  #       Fn::Join:
-  #         - ''
-  #         - - 'arn:aws:s3:::meusick-bucket'
-  #           - Ref: ServerlessDeploymentBucket
-  #   - Effect: 'Allow'
-  #     Action:
-  #       - 's3:PutObject'
-  #     Resource:
-  #       Fn::Join:
-  #         - ''
-  #         - - 'arn:aws:s3:::meusick-bucket'
-  #           - Ref: ServerlessDeploymentBucket
-  #           - '/*'
-  #   - Effect: 'Allow'
-  #     Action:
-  #       - 's3:GetObject'
-  #     Resource:
-  #       Fn::Join:
-  #         - ''
-  #         - - 'arn:aws:s3:::meusick-bucket'
-  #           - Ref: ServerlessDeploymentBucket
-  #           - '/*'
-  #   - Effect: 'Allow'
-  #     Action:
-  #       - 'lambda:InvokeFunction'
-  #     Resource: "*"
+
 
 plugins:
   - serverless-offline
@@ -81,14 +39,24 @@ functions:
           - 's3:ListBucket'
         Resource: "arn:aws:s3:::meusick-bucket"
 
-      # - Effect: 'Allow'
-      #   Action:
-      #     - 's3:GetObject'
-      #   Resource: "arn:aws:s3:::meusick-bucket"
+      - Effect: 'Allow'
+        Action:
+          - 's3:GetObject'
+        Resource: "arn:aws:s3:::meusick-bucket"
 
       - Effect: 'Allow'
         Action:
           - 's3:ListObjects'
+        Resource: "arn:aws:s3:::meusick-bucket"
+      
+      - Effect: 'Allow'
+        Action:
+          - 's3:PutObjectACL'
+        Resource: "arn:aws:s3:::meusick-bucket"
+      
+      - Effect: 'Allow'
+        Action:
+          - 's3:GetObjectACL'
         Resource: "arn:aws:s3:::meusick-bucket"
 
     events:
