@@ -1,12 +1,12 @@
 const AWS = require('aws-sdk');
 const express = require('express');
 
-const BUCKET_NAME = 'meusick-bucket';
-const s3 = new AWS.S3();
+// const BUCKET_NAME = 'meusick-bucket';
+var s3 = new AWS.S3({signatureVersion: 'v4', region:"us-west-2"});
 
 module.exports.hello = (event, context, callback) => {
     const params = {
-        Bucket: BUCKET_NAME
+        Bucket: 'meusick-bucket'
     };
     s3.listObjectsV2(params, (err, data) => {
         console.log('S3 List', data);
@@ -14,7 +14,7 @@ module.exports.hello = (event, context, callback) => {
         let songs = []
         for (let item of data.Contents) {
             let url = s3.getSignedUrl('getObject', {
-                Bucket: BUCKET_NAME,
+                Bucket: 'meusick-bucket',
                 Key: item.Key,
             });
             songs.push(url);
