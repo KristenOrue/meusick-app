@@ -173,7 +173,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1614152252072-2021-02-24T07:37:32.072Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1614782384356-2021-03-03T14:39:44.356Z/meusick-api-node.zip"
         },
         "Handler": "handler.api",
         "Runtime": "nodejs12.x",
@@ -203,7 +203,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1614152252072-2021-02-24T07:37:32.072Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1614782384356-2021-03-03T14:39:44.356Z/meusick-api-node.zip"
         },
         "Handler": "handlerS3.hello",
         "Runtime": "nodejs12.x",
@@ -234,7 +234,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1614152252072-2021-02-24T07:37:32.072Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1614782384356-2021-03-03T14:39:44.356Z/meusick-api-node.zip"
         },
         "Handler": "handler_py.heller",
         "Runtime": "python3.8",
@@ -257,34 +257,34 @@
         "HellerLogGroup"
       ]
     },
-    "HelloLambdaVersionx8t46JvDObS0HCwoi1IEdRd26mjPu4m47QQOFRqwQ": {
+    "HelloLambdaVersionikaUVBq6PoL50EwgxyasItAOnKWHfndwdCuAtYurWo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HelloLambdaFunction"
         },
-        "CodeSha256": "sTODOo66RH8FvnElGmO+tb5y17X5et+AgWj37+meHCg="
+        "CodeSha256": "7S9ZcVCIf/IkEuZuZAkY3PtUdG9wAhkx0fBLAWalsOY="
       }
     },
-    "S3fileLambdaVersionCImHsFJCeOKSiex7aXye94MNERat7cNoW4UTQSwB1Rg": {
+    "S3fileLambdaVersionBeSK7R8yKZjUzzjVe7zOkb6wzqriv6vWYEYqz4DlzI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "S3fileLambdaFunction"
         },
-        "CodeSha256": "sTODOo66RH8FvnElGmO+tb5y17X5et+AgWj37+meHCg="
+        "CodeSha256": "7S9ZcVCIf/IkEuZuZAkY3PtUdG9wAhkx0fBLAWalsOY="
       }
     },
-    "HellerLambdaVersionJGeLOz61dqridoDiECecFGeN3e7ftGIPsVmHMkwSw2k": {
+    "HellerLambdaVersionLVeI9i5oWtCStUKf6n7sD6f14vRtVvIzHPLrBhtR5s": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HellerLambdaFunction"
         },
-        "CodeSha256": "sTODOo66RH8FvnElGmO+tb5y17X5et+AgWj37+meHCg="
+        "CodeSha256": "7S9ZcVCIf/IkEuZuZAkY3PtUdG9wAhkx0fBLAWalsOY="
       }
     },
     "HttpApi": {
@@ -632,19 +632,19 @@
     "HelloLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HelloLambdaVersionx8t46JvDObS0HCwoi1IEdRd26mjPu4m47QQOFRqwQ"
+        "Ref": "HelloLambdaVersionikaUVBq6PoL50EwgxyasItAOnKWHfndwdCuAtYurWo"
       }
     },
     "S3fileLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "S3fileLambdaVersionCImHsFJCeOKSiex7aXye94MNERat7cNoW4UTQSwB1Rg"
+        "Ref": "S3fileLambdaVersionBeSK7R8yKZjUzzjVe7zOkb6wzqriv6vWYEYqz4DlzI"
       }
     },
     "HellerLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HellerLambdaVersionJGeLOz61dqridoDiECecFGeN3e7ftGIPsVmHMkwSw2k"
+        "Ref": "HellerLambdaVersionLVeI9i5oWtCStUKf6n7sD6f14vRtVvIzHPLrBhtR5s"
       }
     },
     "HttpApiId": {

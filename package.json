@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "sls": "serverless"
+    "sls": "serverless",
+    "db": "docker run -p 8000:8000 dwmkerr/dynamodb -sharedDb",
+    "up": "ACTION=CREATE node ddb_local.js",
+    "down": "ACTION=DELETE node ddb_local.js"
   },
   "keywords": [],
   "author": "",

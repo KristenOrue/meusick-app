@@ -1,7 +1,10 @@
 const AWS = require('aws-sdk');
 const express = require('express');
 
-// const BUCKET_NAME = 'meusick-bucket';
+const BUCKET_NAME = 'meusick-bucket';
+const MUSIC_TABLE = 'music';
+SQS_QUEUE_URL = ''
+
 var s3 = new AWS.S3({signatureVersion: 'v4', region:"us-west-2"});
 
 module.exports.hello = (event, context, callback) => {
