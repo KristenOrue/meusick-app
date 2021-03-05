@@ -33,7 +33,7 @@
         }
       ],
       "environment": {
-        "MUSIC_TABLE": "music-table-dev",
+        "MUSIC_TABLE": "music",
         "SERVERLESS_EXPRESS_PLATFORM": "aws"
       },
       "stage": "dev",
@@ -218,7 +218,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/meusick-api-node/dev/1614911325129-2021-03-05T02:28:45.129Z/meusick-api-node.zip"
+                "S3Key": "serverless/meusick-api-node/dev/1614926234667-2021-03-05T06:37:14.667Z/meusick-api-node.zip"
               },
               "Handler": "index.handler",
               "Runtime": "nodejs12.x",
@@ -227,7 +227,7 @@
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "MUSIC_TABLE": "music-table-dev",
+                  "MUSIC_TABLE": "music",
                   "SERVERLESS_EXPRESS_PLATFORM": "aws"
                 }
               },
@@ -249,7 +249,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/meusick-api-node/dev/1614911325129-2021-03-05T02:28:45.129Z/meusick-api-node.zip"
+                "S3Key": "serverless/meusick-api-node/dev/1614926234667-2021-03-05T06:37:14.667Z/meusick-api-node.zip"
               },
               "Handler": "index.handler",
               "Runtime": "nodejs12.x",
@@ -258,7 +258,7 @@
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "MUSIC_TABLE": "music-table-dev",
+                  "MUSIC_TABLE": "music",
                   "SERVERLESS_EXPRESS_PLATFORM": "aws"
                 }
               },
@@ -280,7 +280,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/meusick-api-node/dev/1614911325129-2021-03-05T02:28:45.129Z/meusick-api-node.zip"
+                "S3Key": "serverless/meusick-api-node/dev/1614926234667-2021-03-05T06:37:14.667Z/meusick-api-node.zip"
               },
               "Handler": "index.handler",
               "Runtime": "nodejs12.x",
@@ -289,7 +289,7 @@
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "MUSIC_TABLE": "music-table-dev",
+                  "MUSIC_TABLE": "music",
                   "SERVERLESS_EXPRESS_PLATFORM": "aws"
                 }
               },
@@ -304,34 +304,34 @@
               "CreateGenreLogGroup"
             ]
           },
-          "AppLambdaVersionnn6KlweMLm99m59he4WcCbNvgTH79Fc5TgvYQxi64Q": {
+          "AppLambdaVersioncDBlrdcfEb8b9l0SobGR1k6aSzPgJPfv4qragqIPA": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "nDz/ltOLspNwO7Kg3IVr8vOF974ENfJTWxt8PFlLdzE="
+              "CodeSha256": "m5ZNyMbSz/xC1iI7O64Rp/Ns8Iws2bbhgZ82lwDMXWc="
             }
           },
-          "GetGenreLambdaVersion7fvsMSBfojIGxlLLIxYdoHeFyplndxTvodwfyMixto": {
+          "GetGenreLambdaVersion1g84pp4qnwyoVqzMEDFE1FUjOoaA5OBAAYpAgOYKc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetGenreLambdaFunction"
               },
-              "CodeSha256": "nDz/ltOLspNwO7Kg3IVr8vOF974ENfJTWxt8PFlLdzE="
+              "CodeSha256": "m5ZNyMbSz/xC1iI7O64Rp/Ns8Iws2bbhgZ82lwDMXWc="
             }
           },
-          "CreateGenreLambdaVersionu7fkIHecIUUAfS2nFAOoshjbQiIyDkTbq22uvCtt9T0": {
+          "CreateGenreLambdaVersion7Y6BLoN5MY38mePSQGDgxH0Ceq8pC7RR47d7c7cr5E4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateGenreLambdaFunction"
               },
-              "CodeSha256": "nDz/ltOLspNwO7Kg3IVr8vOF974ENfJTWxt8PFlLdzE="
+              "CodeSha256": "m5ZNyMbSz/xC1iI7O64Rp/Ns8Iws2bbhgZ82lwDMXWc="
             }
           },
           "ApiGatewayRestApi": {
@@ -563,7 +563,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1614911297509": {
+          "ApiGatewayDeployment1614926197569": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -724,7 +724,7 @@
                 "ReadCapacityUnits": 1,
                 "WriteCapacityUnits": 1
               },
-              "TableName": "music-table-dev",
+              "TableName": "music",
               "GlobalSecondaryIndexes": [
                 {
                   "IndexName": "by_artist",
@@ -779,19 +779,19 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionnn6KlweMLm99m59he4WcCbNvgTH79Fc5TgvYQxi64Q"
+              "Ref": "AppLambdaVersioncDBlrdcfEb8b9l0SobGR1k6aSzPgJPfv4qragqIPA"
             }
           },
           "GetGenreLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetGenreLambdaVersion7fvsMSBfojIGxlLLIxYdoHeFyplndxTvodwfyMixto"
+              "Ref": "GetGenreLambdaVersion1g84pp4qnwyoVqzMEDFE1FUjOoaA5OBAAYpAgOYKc"
             }
           },
           "CreateGenreLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateGenreLambdaVersionu7fkIHecIUUAfS2nFAOoshjbQiIyDkTbq22uvCtt9T0"
+              "Ref": "CreateGenreLambdaVersion7Y6BLoN5MY38mePSQGDgxH0Ceq8pC7RR47d7c7cr5E4"
             }
           },
           "ServiceEndpoint": {
@@ -904,7 +904,7 @@
       "vpc": {}
     },
     "custom": {
-      "tableName": "music-table-dev",
+      "tableName": "music",
       "dynamodb": {
         "start": {
           "migrate": true
@@ -936,7 +936,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersionnn6KlweMLm99m59he4WcCbNvgTH79Fc5TgvYQxi64Q"
+        "versionLogicalId": "AppLambdaVersioncDBlrdcfEb8b9l0SobGR1k6aSzPgJPfv4qragqIPA"
       },
       "getGenre": {
         "handler": "index.handler",
@@ -951,7 +951,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GetGenreLambdaVersion7fvsMSBfojIGxlLLIxYdoHeFyplndxTvodwfyMixto"
+        "versionLogicalId": "GetGenreLambdaVersion1g84pp4qnwyoVqzMEDFE1FUjOoaA5OBAAYpAgOYKc"
       },
       "createGenre": {
         "handler": "index.handler",
@@ -966,7 +966,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "CreateGenreLambdaVersionu7fkIHecIUUAfS2nFAOoshjbQiIyDkTbq22uvCtt9T0"
+        "versionLogicalId": "CreateGenreLambdaVersion7Y6BLoN5MY38mePSQGDgxH0Ceq8pC7RR47d7c7cr5E4"
       }
     },
     "resources": {
@@ -1006,7 +1006,7 @@
               "ReadCapacityUnits": 1,
               "WriteCapacityUnits": 1
             },
-            "TableName": "music-table-dev",
+            "TableName": "music",
             "GlobalSecondaryIndexes": [
               {
                 "IndexName": "by_artist",
@@ -1082,7 +1082,7 @@
     "artifact": "/Users/kristenorue/Documents/cs493/AWS-SAM-NODE/meusick-api/.serverless/meusick-api-node.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/meusick-api-node/dev/1614911325129-2021-03-05T02:28:45.129Z",
+    "artifactDirectoryName": "serverless/meusick-api-node/dev/1614926234667-2021-03-05T06:37:14.667Z",
     "artifact": "meusick-api-node.zip"
   }
 }

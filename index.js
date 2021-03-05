@@ -31,28 +31,48 @@ app.get('/', function (req, res) {
   res.send('Hello World!')
 })
 
-// Get Genre endpoint
 app.get('/genre/:genre', function (req, res) {
   const params = {
-    TableName: MUSIC_TABLE,
-    Key: {
-      genre: req.params.genre,
+    TableName: 'music',
+    KeyConditionExpression: 'genre = :genre',
+    ExpressionAttributeValues: {
+      ':genre': req.params.genre,
     },
   }
 
-  dynamoDb.get(params, (error, result) => {
-    if (error) {
-      console.log(error);
-      res.status(400).json({ error: 'Could not get genre' });
-    }
-    if (result.Item) {
-      const {genre, artist, album, song} = result.Item;
-      res.json({ genre, artist, album, song });
-    } else {
-      res.status(404).json({ error: "Genre not found" });
+  dynamoDb.query(params, function(err, data) {
+     if (err) console.log(err);
+     else {
+      console.log(data);
+      res.send({
+        "Genre": data
+      });
     }
   });
 })
+
+// Get Genre endpoint
+// app.get('/genre/:genre', function (req, res) {
+//   const params = {
+//     TableName: MUSIC_TABLE,
+//     Key: {
+//       genre: req.params.genre,
+//     },
+//   }
+
+//   dynamoDb.get(params, (error, result) => {
+//     if (error) {
+//       console.log(error);
+//       res.status(400).json({ error: 'Could not get genre' });
+//     }
+//     if (result.Item) {
+//       const {genre, artist, album, song} = result.Item;
+//       res.json({ genre, artist, album, song });
+//     } else {
+//       res.status(404).json({ error: "Genre not found" });
+//     }
+//   });
+// })
 
 // Create genre endpoint
 app.post('/genre', function (req, res) {

@@ -4,7 +4,7 @@ frameworkVersion: '2'
 
 
 custom:
-  tableName: 'music-table-${self:provider.stage}'
+  tableName: 'music'
   dynamodb:
     start:
       migrate: true
