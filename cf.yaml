@@ -7,15 +7,19 @@ Resources:
       TableName: "music"
 
       AttributeDefinitions:
-        - AttributeName: "pk"
+        - AttributeName: "genre" #pk
           AttributeType: "S"
-        - AttributeName: "sk"
+        - AttributeName: "artist" #sk
+          AttributeType: "S"
+        - AttributeName: "album" #sk
+          AttributeType: "S"
+        - AttributeName: "song" #sk
           AttributeType: "S"
 
       KeySchema:
-        - AttributeName: "pk"
+        - AttributeName: "genre" #pk
           KeyType: "HASH"
-        - AttributeName: "sk"
+        - AttributeName: "artist" #sk
           KeyType: "RANGE"
 
       ProvisionedThroughput:
@@ -24,10 +28,10 @@ Resources:
 
       GlobalSecondaryIndexes:
         - 
-          IndexName: "by_sk"
+          IndexName: "by_artist" #Search for Artist by genre
           KeySchema:
 
-            - AttributeName: "sk"
+            - AttributeName: "artist"
               KeyType: "HASH"
 
             - AttributeName: "pk" 

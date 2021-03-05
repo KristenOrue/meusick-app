@@ -1,52 +1,176 @@
 service: meusick-api-node
-# app and org for use with dashboard.serverless.com
-#app: your-app-name
-#org: your-org-name
 frameworkVersion: '2'
+
+
+
+custom:
+  tableName: 'music-table-${self:provider.stage}'
+  dynamodb:
+    start:
+      migrate: true
 
 provider:
   name: aws
   runtime: nodejs12.x
   lambdaHashingVersion: 20201221
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - s3:ListBucket
+        - s3:GetObject
+        - s3:ListObjects
+
+      Resource:
+        - { "Fn::GetAtt": ["MusicDynamoDBTable", "Arn" ] }
+  environment:
+    MUSIC_TABLE: ${self:custom.tableName}
 
 plugins:
+  - serverless-dynamodb-local
   - serverless-offline
   - serverless-express
   - serverless-wsgi
   - serverless-iam-roles-per-function
 
 functions:
-  hello:
-    handler: handler.api
+  app:
+    handler: index.handler
     events:
-      - httpApi:
-          path: /ex
-          method: get
-  s3file:
-    handler: handlerS3.hello
-    iamRoleStatements:
-      - Effect: 'Allow'
-        Action:
-          - 's3:ListBucket'
-        Resource: "arn:aws:s3:::meusick-bucket"
+      - http: ANY /
+      - http: 'ANY /{proxy+}'
 
-      - Effect: 'Allow'
-        Action:
-          - 's3:GetObject'
-        Resource: "arn:aws:s3:::meusick-bucket"
+  getGenre:
+    handler: index.handler
+    events:
+      - http: 'GET /genre/{proxy+}'
 
-      - Effect: 'Allow'
-        Action:
-          - 's3:ListObjects'
-        Resource: "arn:aws:s3:::meusick-bucket"
+  createGenre:
+    handler: index.handler
     events:
-      - httpApi:
-          path: /s3file
-          method: get
-  heller:
-    runtime: python3.8
-    handler: handler_py.heller
-    events:
-      - httpApi:
-          path: /heller
-          method: get
+      - http: 'POST /genre'
+
+resources:
+  Resources:
+    MusicDynamoDBTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: "genre"
+            AttributeType: "S"
+          -
+            AttributeName: "artist"
+            AttributeType: "S"
+          -
+            AttributeName: "album"
+            AttributeType: "S"
+          -
+            AttributeName: "song"
+            AttributeType: "S"
+
+        KeySchema:
+          -
+            AttributeName: "genre"
+            KeyType: HASH
+          -
+            AttributeName: "artist"
+            KeyType: RANGE
+          
+
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
+        TableName: ${self:custom.tableName} 
+
+        GlobalSecondaryIndexes:
+        - 
+          IndexName: "by_artist"
+          KeySchema:
+
+            - AttributeName: "artist"
+              KeyType: "HASH"
+
+            - AttributeName: "genre" 
+              KeyType: "RANGE"
+          
+          Projection:
+            ProjectionType: ALL
+          
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
+          
+        -
+          IndexName: "by_song"
+          KeySchema:
+
+            - AttributeName: "song"
+              KeyType: "HASH"
+
+            - AttributeName: "album" 
+              KeyType: "RANGE"
+          
+          Projection:
+            ProjectionType: ALL
+          
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
+          
+  #Only have your keys be a String/Boolean be a hash key
+
+  # genre:
+  #   handler: handlerGenre.api
+  #   events:
+  #     - httpApi:
+  #         path: /genre
+  #         method: get
+  # song:
+  #   handler: handlerSong.api
+  #   events:
+  #     - httpApi:
+  #         path: /
+  #         method: get
+
+
+  # hello:
+  #   handler: handler.api
+  #   events:
+  #     - httpApi:
+  #         path: /ex
+  #         method: get
+  # s3file:
+  #   handler: handlerS3.hello
+  #   iamRoleStatements:
+  #     - Effect: 'Allow'
+  #       Action:
+  #         - 's3:ListBucket'
+  #       Resource: "arn:aws:s3:::meusick-bucket"
+
+  #     - Effect: 'Allow'
+  #       Action:
+  #         - 's3:GetObject'
+  #       Resource: "arn:aws:s3:::meusick-bucket"
+
+  #     - Effect: 'Allow'
+  #       Action:
+  #         - 's3:ListObjects'
+  #       Resource: "arn:aws:s3:::meusick-bucket"
+  #   events:
+  #     - httpApi:
+  #         path: /s3file
+  #         method: get
+  # heller:
+  #   runtime: python3.8
+  #   handler: handler_py.heller
+  #   events:
+  #     - httpApi:
+  #         path: /heller
+  #         method: get
