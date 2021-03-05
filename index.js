@@ -31,12 +31,12 @@ app.get('/', function (req, res) {
   res.send('Hello World!')
 })
 
-app.get('/genre/:genre', function (req, res) {
+app.get('/genres', function (req, res) {
   const params = {
     TableName: 'music',
-    KeyConditionExpression: 'genre = :genre',
+    KeyConditionExpression: 'pk = :pk',
     ExpressionAttributeValues: {
-      ':genre': req.params.genre,
+      ':pk': "genre"
     },
   }
 
@@ -50,6 +50,7 @@ app.get('/genre/:genre', function (req, res) {
     }
   });
 })
+
 
 // Get Genre endpoint
 // app.get('/genre/:genre', function (req, res) {

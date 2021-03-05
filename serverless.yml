@@ -45,15 +45,11 @@ functions:
       - http: ANY /
       - http: 'ANY /{proxy+}'
 
-  getGenre:
+  getGenres:
     handler: index.handler
     events:
-      - http: 'GET /genre/{proxy+}'
+      - http: 'GET /genres'
 
-  createGenre:
-    handler: index.handler
-    events:
-      - http: 'POST /genre'
 
 resources:
   Resources:
@@ -62,24 +58,18 @@ resources:
       Properties:
         AttributeDefinitions:
           -
-            AttributeName: "genre"
+            AttributeName: "pk"
             AttributeType: "S"
           -
-            AttributeName: "artist"
-            AttributeType: "S"
-          -
-            AttributeName: "album"
-            AttributeType: "S"
-          -
-            AttributeName: "song"
+            AttributeName: "sk"
             AttributeType: "S"
 
         KeySchema:
           -
-            AttributeName: "genre"
+            AttributeName: "pk"
             KeyType: HASH
           -
-            AttributeName: "artist"
+            AttributeName: "sk"
             KeyType: RANGE
           
 
@@ -89,40 +79,40 @@ resources:
 
         TableName: ${self:custom.tableName} 
 
-        GlobalSecondaryIndexes:
-        - 
-          IndexName: "by_artist"
-          KeySchema:
+        # GlobalSecondaryIndexes:
+        # - 
+        #   IndexName: "by_artist"
+        #   KeySchema:
 
-            - AttributeName: "artist"
-              KeyType: "HASH"
+        #     - AttributeName: "artist"
+        #       KeyType: "HASH"
 
-            - AttributeName: "genre" 
-              KeyType: "RANGE"
+        #     - AttributeName: "genre" 
+        #       KeyType: "RANGE"
           
-          Projection:
-            ProjectionType: ALL
+        #   Projection:
+        #     ProjectionType: ALL
           
-          ProvisionedThroughput:
-            ReadCapacityUnits: 1
-            WriteCapacityUnits: 1
+        #   ProvisionedThroughput:
+        #     ReadCapacityUnits: 1
+        #     WriteCapacityUnits: 1
           
-        -
-          IndexName: "by_song"
-          KeySchema:
+        # -
+        #   IndexName: "by_song"
+        #   KeySchema:
 
-            - AttributeName: "song"
-              KeyType: "HASH"
+        #     - AttributeName: "song"
+        #       KeyType: "HASH"
 
-            - AttributeName: "album" 
-              KeyType: "RANGE"
+        #     - AttributeName: "album" 
+        #       KeyType: "RANGE"
           
-          Projection:
-            ProjectionType: ALL
+        #   Projection:
+        #     ProjectionType: ALL
           
-          ProvisionedThroughput:
-            ReadCapacityUnits: 1
-            WriteCapacityUnits: 1
+        #   ProvisionedThroughput:
+        #     ReadCapacityUnits: 1
+        #     WriteCapacityUnits: 1
           
   #Only have your keys be a String/Boolean be a hash key
 

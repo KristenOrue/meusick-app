@@ -77,16 +77,10 @@
         "LogGroupName": "/aws/lambda/meusick-api-node-dev-app"
       }
     },
-    "GetGenreLogGroup": {
+    "GetGenresLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/meusick-api-node-dev-getGenre"
-      }
-    },
-    "CreateGenreLogGroup": {
-      "Type": "AWS::Logs::LogGroup",
-      "Properties": {
-        "LogGroupName": "/aws/lambda/meusick-api-node-dev-createGenre"
+        "LogGroupName": "/aws/lambda/meusick-api-node-dev-getGenres"
       }
     },
     "IamRoleLambdaExecution": {
@@ -195,7 +189,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1614926234667-2021-03-05T06:37:14.667Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1614970478335-2021-03-05T18:54:38.335Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -219,18 +213,18 @@
         "AppLogGroup"
       ]
     },
-    "GetGenreLambdaFunction": {
+    "GetGenresLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1614926234667-2021-03-05T06:37:14.667Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1614970478335-2021-03-05T18:54:38.335Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
-        "FunctionName": "meusick-api-node-dev-getGenre",
+        "FunctionName": "meusick-api-node-dev-getGenres",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
@@ -247,68 +241,27 @@
         }
       },
       "DependsOn": [
-        "GetGenreLogGroup"
+        "GetGenresLogGroup"
       ]
     },
-    "CreateGenreLambdaFunction": {
-      "Type": "AWS::Lambda::Function",
-      "Properties": {
-        "Code": {
-          "S3Bucket": {
-            "Ref": "ServerlessDeploymentBucket"
-          },
-          "S3Key": "serverless/meusick-api-node/dev/1614926234667-2021-03-05T06:37:14.667Z/meusick-api-node.zip"
-        },
-        "Handler": "index.handler",
-        "Runtime": "nodejs12.x",
-        "FunctionName": "meusick-api-node-dev-createGenre",
-        "MemorySize": 1024,
-        "Timeout": 6,
-        "Environment": {
-          "Variables": {
-            "MUSIC_TABLE": "music",
-            "SERVERLESS_EXPRESS_PLATFORM": "aws"
-          }
-        },
-        "Role": {
-          "Fn::GetAtt": [
-            "IamRoleLambdaExecution",
-            "Arn"
-          ]
-        }
-      },
-      "DependsOn": [
-        "CreateGenreLogGroup"
-      ]
-    },
-    "AppLambdaVersioncDBlrdcfEb8b9l0SobGR1k6aSzPgJPfv4qragqIPA": {
+    "AppLambdaVersionyQs0MOBAlbDTh86iFhd8vlDRFXZz9Fy5sskDGs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AppLambdaFunction"
         },
-        "CodeSha256": "m5ZNyMbSz/xC1iI7O64Rp/Ns8Iws2bbhgZ82lwDMXWc="
+        "CodeSha256": "hYXUIL9/VrqBJAwCa+ZFbEPGPIZbMzJHdxmrcvhBfQw="
       }
     },
-    "GetGenreLambdaVersion1g84pp4qnwyoVqzMEDFE1FUjOoaA5OBAAYpAgOYKc": {
+    "GetGenresLambdaVersioncKRns23e4eLLMObikm7E9T9diPE8DeOyTX8eZvQR5I": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
-          "Ref": "GetGenreLambdaFunction"
+          "Ref": "GetGenresLambdaFunction"
         },
-        "CodeSha256": "m5ZNyMbSz/xC1iI7O64Rp/Ns8Iws2bbhgZ82lwDMXWc="
-      }
-    },
-    "CreateGenreLambdaVersion7Y6BLoN5MY38mePSQGDgxH0Ceq8pC7RR47d7c7cr5E4": {
-      "Type": "AWS::Lambda::Version",
-      "DeletionPolicy": "Retain",
-      "Properties": {
-        "FunctionName": {
-          "Ref": "CreateGenreLambdaFunction"
-        },
-        "CodeSha256": "m5ZNyMbSz/xC1iI7O64Rp/Ns8Iws2bbhgZ82lwDMXWc="
+        "CodeSha256": "hYXUIL9/VrqBJAwCa+ZFbEPGPIZbMzJHdxmrcvhBfQw="
       }
     },
     "ApiGatewayRestApi": {
@@ -338,7 +291,7 @@
         }
       }
     },
-    "ApiGatewayResourceGenre": {
+    "ApiGatewayResourceGenres": {
       "Type": "AWS::ApiGateway::Resource",
       "Properties": {
         "ParentId": {
@@ -347,19 +300,7 @@
             "RootResourceId"
           ]
         },
-        "PathPart": "genre",
-        "RestApiId": {
-          "Ref": "ApiGatewayRestApi"
-        }
-      }
-    },
-    "ApiGatewayResourceGenreProxyVar": {
-      "Type": "AWS::ApiGateway::Resource",
-      "Properties": {
-        "ParentId": {
-          "Ref": "ApiGatewayResourceGenre"
-        },
-        "PathPart": "{proxy+}",
+        "PathPart": "genres",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -454,13 +395,13 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayMethodGenreProxyVarGet": {
+    "ApiGatewayMethodGenresGet": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
         "HttpMethod": "GET",
         "RequestParameters": {},
         "ResourceId": {
-          "Ref": "ApiGatewayResourceGenreProxyVar"
+          "Ref": "ApiGatewayResourceGenres"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -485,7 +426,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "GetGenreLambdaFunction",
+                    "GetGenresLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -497,50 +438,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayMethodGenrePost": {
-      "Type": "AWS::ApiGateway::Method",
-      "Properties": {
-        "HttpMethod": "POST",
-        "RequestParameters": {},
-        "ResourceId": {
-          "Ref": "ApiGatewayResourceGenre"
-        },
-        "RestApiId": {
-          "Ref": "ApiGatewayRestApi"
-        },
-        "ApiKeyRequired": false,
-        "AuthorizationType": "NONE",
-        "Integration": {
-          "IntegrationHttpMethod": "POST",
-          "Type": "AWS_PROXY",
-          "Uri": {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition"
-                },
-                ":apigateway:",
-                {
-                  "Ref": "AWS::Region"
-                },
-                ":lambda:path/2015-03-31/functions/",
-                {
-                  "Fn::GetAtt": [
-                    "CreateGenreLambdaFunction",
-                    "Arn"
-                  ]
-                },
-                "/invocations"
-              ]
-            ]
-          }
-        },
-        "MethodResponses": []
-      }
-    },
-    "ApiGatewayDeployment1614926197569": {
+    "ApiGatewayDeployment1614970441944": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -551,8 +449,7 @@
       "DependsOn": [
         "ApiGatewayMethodAny",
         "ApiGatewayMethodProxyVarAny",
-        "ApiGatewayMethodGenreProxyVarGet",
-        "ApiGatewayMethodGenrePost"
+        "ApiGatewayMethodGenresGet"
       ]
     },
     "AppLambdaPermissionApiGateway": {
@@ -592,49 +489,12 @@
         }
       }
     },
-    "GetGenreLambdaPermissionApiGateway": {
+    "GetGenresLambdaPermissionApiGateway": {
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "FunctionName": {
           "Fn::GetAtt": [
-            "GetGenreLambdaFunction",
-            "Arn"
-          ]
-        },
-        "Action": "lambda:InvokeFunction",
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": {
-          "Fn::Join": [
-            "",
-            [
-              "arn:",
-              {
-                "Ref": "AWS::Partition"
-              },
-              ":execute-api:",
-              {
-                "Ref": "AWS::Region"
-              },
-              ":",
-              {
-                "Ref": "AWS::AccountId"
-              },
-              ":",
-              {
-                "Ref": "ApiGatewayRestApi"
-              },
-              "/*/*"
-            ]
-          ]
-        }
-      }
-    },
-    "CreateGenreLambdaPermissionApiGateway": {
-      "Type": "AWS::Lambda::Permission",
-      "Properties": {
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "CreateGenreLambdaFunction",
+            "GetGenresLambdaFunction",
             "Arn"
           ]
         },
@@ -671,29 +531,21 @@
       "Properties": {
         "AttributeDefinitions": [
           {
-            "AttributeName": "genre",
+            "AttributeName": "pk",
             "AttributeType": "S"
           },
           {
-            "AttributeName": "artist",
-            "AttributeType": "S"
-          },
-          {
-            "AttributeName": "album",
-            "AttributeType": "S"
-          },
-          {
-            "AttributeName": "song",
+            "AttributeName": "sk",
             "AttributeType": "S"
           }
         ],
         "KeySchema": [
           {
-            "AttributeName": "genre",
+            "AttributeName": "pk",
             "KeyType": "HASH"
           },
           {
-            "AttributeName": "artist",
+            "AttributeName": "sk",
             "KeyType": "RANGE"
           }
         ],
@@ -701,49 +553,7 @@
           "ReadCapacityUnits": 1,
           "WriteCapacityUnits": 1
         },
-        "TableName": "music",
-        "GlobalSecondaryIndexes": [
-          {
-            "IndexName": "by_artist",
-            "KeySchema": [
-              {
-                "AttributeName": "artist",
-                "KeyType": "HASH"
-              },
-              {
-                "AttributeName": "genre",
-                "KeyType": "RANGE"
-              }
-            ],
-            "Projection": {
-              "ProjectionType": "ALL"
-            },
-            "ProvisionedThroughput": {
-              "ReadCapacityUnits": 1,
-              "WriteCapacityUnits": 1
-            }
-          },
-          {
-            "IndexName": "by_song",
-            "KeySchema": [
-              {
-                "AttributeName": "song",
-                "KeyType": "HASH"
-              },
-              {
-                "AttributeName": "album",
-                "KeyType": "RANGE"
-              }
-            ],
-            "Projection": {
-              "ProjectionType": "ALL"
-            },
-            "ProvisionedThroughput": {
-              "ReadCapacityUnits": 1,
-              "WriteCapacityUnits": 1
-            }
-          }
-        ]
+        "TableName": "music"
       }
     }
   },
@@ -756,19 +566,13 @@
     "AppLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AppLambdaVersioncDBlrdcfEb8b9l0SobGR1k6aSzPgJPfv4qragqIPA"
+        "Ref": "AppLambdaVersionyQs0MOBAlbDTh86iFhd8vlDRFXZz9Fy5sskDGs"
       }
     },
-    "GetGenreLambdaFunctionQualifiedArn": {
+    "GetGenresLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetGenreLambdaVersion1g84pp4qnwyoVqzMEDFE1FUjOoaA5OBAAYpAgOYKc"
-      }
-    },
-    "CreateGenreLambdaFunctionQualifiedArn": {
-      "Description": "Current Lambda function version",
-      "Value": {
-        "Ref": "CreateGenreLambdaVersion7Y6BLoN5MY38mePSQGDgxH0Ceq8pC7RR47d7c7cr5E4"
+        "Ref": "GetGenresLambdaVersioncKRns23e4eLLMObikm7E9T9diPE8DeOyTX8eZvQR5I"
       }
     },
     "ServiceEndpoint": {
