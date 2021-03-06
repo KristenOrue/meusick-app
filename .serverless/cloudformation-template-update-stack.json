@@ -189,7 +189,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1614970478335-2021-03-05T18:54:38.335Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615004113220-2021-03-06T04:15:13.220Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -220,7 +220,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1614970478335-2021-03-05T18:54:38.335Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615004113220-2021-03-06T04:15:13.220Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -244,24 +244,24 @@
         "GetGenresLogGroup"
       ]
     },
-    "AppLambdaVersionyQs0MOBAlbDTh86iFhd8vlDRFXZz9Fy5sskDGs": {
+    "AppLambdaVersionViobw3b4eKGnVH1Lfq8df9mbRbNyA5HtkzWpRCwoVQg": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AppLambdaFunction"
         },
-        "CodeSha256": "hYXUIL9/VrqBJAwCa+ZFbEPGPIZbMzJHdxmrcvhBfQw="
+        "CodeSha256": "T7WZQ0bJ75w2Isayue2IJ2PxTobN0CTfMcK/6hnQhGQ="
       }
     },
-    "GetGenresLambdaVersioncKRns23e4eLLMObikm7E9T9diPE8DeOyTX8eZvQR5I": {
+    "GetGenresLambdaVersionMu161qfkZvpcXin4oq9C51uYlWGJ0bxSOzUp7ugtGE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetGenresLambdaFunction"
         },
-        "CodeSha256": "hYXUIL9/VrqBJAwCa+ZFbEPGPIZbMzJHdxmrcvhBfQw="
+        "CodeSha256": "T7WZQ0bJ75w2Isayue2IJ2PxTobN0CTfMcK/6hnQhGQ="
       }
     },
     "ApiGatewayRestApi": {
@@ -438,7 +438,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1614970441944": {
+    "ApiGatewayDeployment1615004086169": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -553,7 +553,29 @@
           "ReadCapacityUnits": 1,
           "WriteCapacityUnits": 1
         },
-        "TableName": "music"
+        "TableName": "music",
+        "GlobalSecondaryIndexes": [
+          {
+            "IndexName": "by_sk",
+            "KeySchema": [
+              {
+                "AttributeName": "sk",
+                "KeyType": "HASH"
+              },
+              {
+                "AttributeName": "pk",
+                "KeyType": "RANGE"
+              }
+            ],
+            "ProvisionedThroughput": {
+              "ReadCapacityUnits": 1,
+              "WriteCapacityUnits": 1
+            },
+            "Projection": {
+              "ProjectionType": "ALL"
+            }
+          }
+        ]
       }
     }
   },
@@ -566,13 +588,13 @@
     "AppLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AppLambdaVersionyQs0MOBAlbDTh86iFhd8vlDRFXZz9Fy5sskDGs"
+        "Ref": "AppLambdaVersionViobw3b4eKGnVH1Lfq8df9mbRbNyA5HtkzWpRCwoVQg"
       }
     },
     "GetGenresLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetGenresLambdaVersioncKRns23e4eLLMObikm7E9T9diPE8DeOyTX8eZvQR5I"
+        "Ref": "GetGenresLambdaVersionMu161qfkZvpcXin4oq9C51uYlWGJ0bxSOzUp7ugtGE"
       }
     },
     "ServiceEndpoint": {

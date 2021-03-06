@@ -1,8 +1,6 @@
 service: meusick-api-node
 frameworkVersion: '2'
 
-
-
 custom:
   tableName: 'music'
   dynamodb:
@@ -79,15 +77,34 @@ resources:
 
         TableName: ${self:custom.tableName} 
 
+        GlobalSecondaryIndexes:
+        -
+          IndexName: "by_sk"
+          KeySchema:
+          
+            - AttributeName: "sk"
+              KeyType: "HASH"
+          
+            - AttributeName: "pk" #Another item as your range
+              KeyType: "RANGE"
+
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
+
+          Projection:
+            ProjectionType: ALL
+
+
         # GlobalSecondaryIndexes:
         # - 
-        #   IndexName: "by_artist"
+        #   IndexName: "by_sk"
         #   KeySchema:
 
-        #     - AttributeName: "artist"
+        #     - AttributeName: "sk"
         #       KeyType: "HASH"
 
-        #     - AttributeName: "genre" 
+        #     - AttributeName: "pk" 
         #       KeyType: "RANGE"
           
         #   Projection:

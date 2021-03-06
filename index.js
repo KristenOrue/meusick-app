@@ -51,6 +51,50 @@ app.get('/genres', function (req, res) {
   });
 })
 
+app.get('/artists/for/genre/:genre', function (req, res) {
+  const params = {
+    TableName: 'music',
+    KeyConditionExpression: 'pk = :pk and begins_with(sk, :sk)',
+    ExpressionAttributeValues: {
+      ':pk': "genre#" + req.params.genre,
+      ':sk': "artist"
+    },
+  }
+  dynamoDb.query(params, function(err, data) {
+     if (err) console.log(err);
+     else {
+      console.log(data);
+      artists = [];
+      data.Items.forEach(function(item) {
+        artists.push(item.info.artist);
+      });
+      res.send({
+        "Artists": artists
+      });
+    }
+  });
+})
+
+app.get('/albums/for/artist/:artist', function (req, res) {
+  const params = {
+    TableName: 'music',
+    KeyConditionExpression: 'pk = :pk and sk = :sk',
+    ExpressionAttributeValues: {
+      ':pk': "artist",
+      ':sk': "album"
+    },
+  }
+
+  dynamoDb.query(params, function(err, data) {
+     if (err) console.log(err);
+     else {
+      console.log(data);
+      res.send({
+        "Genre": data
+      });
+    }
+  });
+})
 
 // Get Genre endpoint
 // app.get('/genre/:genre', function (req, res) {
