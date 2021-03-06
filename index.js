@@ -4,6 +4,8 @@ const express = require('express')
 const app = express()
 const AWS = require('aws-sdk');
 
+var s3 = new AWS.S3({signatureVersion: 'v4', region:"us-west-2"});
+
 
 const MUSIC_TABLE = process.env.MUSIC_TABLE;
 const IS_OFFLINE = process.env.IS_OFFLINE;
@@ -74,23 +76,74 @@ app.get('/artists/for/genre/:genre', function (req, res) {
     }
   });
 })
-
+//albums BY Artist
 app.get('/albums/for/artist/:artist', function (req, res) {
   const params = {
     TableName: 'music',
-    KeyConditionExpression: 'pk = :pk and sk = :sk',
+    KeyConditionExpression: 'pk = :pk and begins_with(sk, :sk)',
     ExpressionAttributeValues: {
-      ':pk': "artist",
+      ':pk': "artist#" + req.params.artist,
       ':sk': "album"
     },
   }
-
   dynamoDb.query(params, function(err, data) {
      if (err) console.log(err);
      else {
       console.log(data);
+      albums = [];
+      data.Items.forEach(function(item) {
+        albums.push(item.info.albums);
+      });
       res.send({
-        "Genre": data
+        "Albums": albums
+      });
+    }
+  });
+})
+
+//Songs BY Album
+app.get('/songs/for/album/:album', function (req, res) {
+  const params = {
+    TableName: 'music',
+    KeyConditionExpression: 'pk = :pk and begins_with(sk, :sk)',
+    ExpressionAttributeValues: {
+      ':pk': "album#" + req.params.album,
+      ':sk': "song"
+    },
+  }
+  dynamoDb.query(params, function(err, data) {
+     if (err) console.log(err);
+     else {
+      console.log(data);
+      songs = [];
+      data.Items.forEach(function(item) {
+        songs.push(item.info.song);
+      });
+      res.send({
+        "Songs": songs
+      });
+    }
+  });
+})
+
+//Songs BY Album
+app.get('/song/:song', function (req, res) {
+  const params = {
+    TableName: 'music',
+    KeyConditionExpression: 'pk = :pk and sk = :sk',
+    ExpressionAttributeValues: {
+      ':pk': "song",
+      ':sk': "song#" + req.params.song
+    },
+  }
+  dynamoDb.query(params, function(err, data) {
+     if (err) console.log(err);
+     else {
+      console.log(data);
+      var params = {Bucket: 'meusick-bucket', Key: data.Items[0].info.song};
+      var url = s3.getSignedUrl('getObject', params);
+      res.send({
+        "Song": url
       });
     }
   });

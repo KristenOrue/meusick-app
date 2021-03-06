@@ -48,6 +48,26 @@ functions:
     events:
       - http: 'GET /genres'
 
+  getArtistsByGenre:
+    handler: index.handler
+    events:
+      - http: 'GET /artists/for/genre/{proxy+}'
+
+  getAlbumsByArtist:
+    handler: index.handler
+    events:
+      - http: 'GET /albums/for/artist/{proxy+}'
+
+  getSongsByAlbum:
+    handler: index.handler
+    events:
+      - http: 'GET /songs/for/album/{proxy+}'
+
+  getSong:
+    handler: index.handler
+    events: 
+      - http: 'GET /song/{proxy+}'
+
 
 resources:
   Resources:

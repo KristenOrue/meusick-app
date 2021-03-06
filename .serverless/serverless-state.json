@@ -125,6 +125,30 @@
               "LogGroupName": "/aws/lambda/meusick-api-node-dev-getGenres"
             }
           },
+          "GetArtistsByGenreLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/meusick-api-node-dev-getArtistsByGenre"
+            }
+          },
+          "GetAlbumsByArtistLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/meusick-api-node-dev-getAlbumsByArtist"
+            }
+          },
+          "GetSongsByAlbumLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/meusick-api-node-dev-getSongsByAlbum"
+            }
+          },
+          "GetSongLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/meusick-api-node-dev-getSong"
+            }
+          },
           "IamRoleLambdaExecution": {
             "Type": "AWS::IAM::Role",
             "Properties": {
@@ -212,7 +236,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/meusick-api-node/dev/1615004113220-2021-03-06T04:15:13.220Z/meusick-api-node.zip"
+                "S3Key": "serverless/meusick-api-node/dev/1615008345796-2021-03-06T05:25:45.796Z/meusick-api-node.zip"
               },
               "Handler": "index.handler",
               "Runtime": "nodejs12.x",
@@ -243,7 +267,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/meusick-api-node/dev/1615004113220-2021-03-06T04:15:13.220Z/meusick-api-node.zip"
+                "S3Key": "serverless/meusick-api-node/dev/1615008345796-2021-03-06T05:25:45.796Z/meusick-api-node.zip"
               },
               "Handler": "index.handler",
               "Runtime": "nodejs12.x",
@@ -267,24 +291,188 @@
               "GetGenresLogGroup"
             ]
           },
-          "AppLambdaVersionViobw3b4eKGnVH1Lfq8df9mbRbNyA5HtkzWpRCwoVQg": {
+          "GetArtistsByGenreLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/meusick-api-node/dev/1615008345796-2021-03-06T05:25:45.796Z/meusick-api-node.zip"
+              },
+              "Handler": "index.handler",
+              "Runtime": "nodejs12.x",
+              "FunctionName": "meusick-api-node-dev-getArtistsByGenre",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "MUSIC_TABLE": "music",
+                  "SERVERLESS_EXPRESS_PLATFORM": "aws"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetArtistsByGenreLogGroup"
+            ]
+          },
+          "GetAlbumsByArtistLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/meusick-api-node/dev/1615008345796-2021-03-06T05:25:45.796Z/meusick-api-node.zip"
+              },
+              "Handler": "index.handler",
+              "Runtime": "nodejs12.x",
+              "FunctionName": "meusick-api-node-dev-getAlbumsByArtist",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "MUSIC_TABLE": "music",
+                  "SERVERLESS_EXPRESS_PLATFORM": "aws"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetAlbumsByArtistLogGroup"
+            ]
+          },
+          "GetSongsByAlbumLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/meusick-api-node/dev/1615008345796-2021-03-06T05:25:45.796Z/meusick-api-node.zip"
+              },
+              "Handler": "index.handler",
+              "Runtime": "nodejs12.x",
+              "FunctionName": "meusick-api-node-dev-getSongsByAlbum",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "MUSIC_TABLE": "music",
+                  "SERVERLESS_EXPRESS_PLATFORM": "aws"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetSongsByAlbumLogGroup"
+            ]
+          },
+          "GetSongLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/meusick-api-node/dev/1615008345796-2021-03-06T05:25:45.796Z/meusick-api-node.zip"
+              },
+              "Handler": "index.handler",
+              "Runtime": "nodejs12.x",
+              "FunctionName": "meusick-api-node-dev-getSong",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "MUSIC_TABLE": "music",
+                  "SERVERLESS_EXPRESS_PLATFORM": "aws"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetSongLogGroup"
+            ]
+          },
+          "AppLambdaVersionAMWxPqjEPSfnoJSRx5NrbCjGFw5UVtWSRbGcPmKZcU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "T7WZQ0bJ75w2Isayue2IJ2PxTobN0CTfMcK/6hnQhGQ="
+              "CodeSha256": "CD7WSkv9jARn6bZdUg23A351EfljAPUVknJbzYl93T8="
             }
           },
-          "GetGenresLambdaVersionMu161qfkZvpcXin4oq9C51uYlWGJ0bxSOzUp7ugtGE": {
+          "GetGenresLambdaVersionrANcsONkqKgfmIq59sIYOf9sx5S5Dk51jpfheSF0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetGenresLambdaFunction"
               },
-              "CodeSha256": "T7WZQ0bJ75w2Isayue2IJ2PxTobN0CTfMcK/6hnQhGQ="
+              "CodeSha256": "CD7WSkv9jARn6bZdUg23A351EfljAPUVknJbzYl93T8="
+            }
+          },
+          "GetArtistsByGenreLambdaVersionqDJGxkWf6OMDlhNbunM108gQawHudnb3c25Zchdos4o": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetArtistsByGenreLambdaFunction"
+              },
+              "CodeSha256": "CD7WSkv9jARn6bZdUg23A351EfljAPUVknJbzYl93T8="
+            }
+          },
+          "GetAlbumsByArtistLambdaVersion16HaTMs205nE9uvZ3btMMcNCel5UKxRj56VdRKN9w": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetAlbumsByArtistLambdaFunction"
+              },
+              "CodeSha256": "CD7WSkv9jARn6bZdUg23A351EfljAPUVknJbzYl93T8="
+            }
+          },
+          "GetSongsByAlbumLambdaVersionRcyAQ03DBn24W1vCpKZ77Cq27jZoHPVZXYq4xtx00JQ": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetSongsByAlbumLambdaFunction"
+              },
+              "CodeSha256": "CD7WSkv9jARn6bZdUg23A351EfljAPUVknJbzYl93T8="
+            }
+          },
+          "GetSongLambdaVersionuYx1dAo4wLQA2y2WG4SKO1gvKVHzz5fIr3RDJQovVyU": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetSongLambdaFunction"
+              },
+              "CodeSha256": "CD7WSkv9jARn6bZdUg23A351EfljAPUVknJbzYl93T8="
             }
           },
           "ApiGatewayRestApi": {
@@ -324,6 +512,186 @@
                 ]
               },
               "PathPart": "genres",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceArtists": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "artists",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceArtistsFor": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceArtists"
+              },
+              "PathPart": "for",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceArtistsForGenre": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceArtistsFor"
+              },
+              "PathPart": "genre",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceArtistsForGenreProxyVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceArtistsForGenre"
+              },
+              "PathPart": "{proxy+}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceAlbums": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "albums",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceAlbumsFor": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceAlbums"
+              },
+              "PathPart": "for",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceAlbumsForArtist": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceAlbumsFor"
+              },
+              "PathPart": "artist",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceAlbumsForArtistProxyVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceAlbumsForArtist"
+              },
+              "PathPart": "{proxy+}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceSongs": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "songs",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceSongsFor": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceSongs"
+              },
+              "PathPart": "for",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceSongsForAlbum": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceSongsFor"
+              },
+              "PathPart": "album",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceSongsForAlbumProxyVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceSongsForAlbum"
+              },
+              "PathPart": "{proxy+}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceSong": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "song",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceSongProxyVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceSong"
+              },
+              "PathPart": "{proxy+}",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -461,7 +829,179 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1615004086169": {
+          "ApiGatewayMethodArtistsForGenreProxyVarGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceArtistsForGenreProxyVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "GetArtistsByGenreLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodAlbumsForArtistProxyVarGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceAlbumsForArtistProxyVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "GetAlbumsByArtistLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodSongsForAlbumProxyVarGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceSongsForAlbumProxyVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "GetSongsByAlbumLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodSongProxyVarGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceSongProxyVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "GetSongLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayDeployment1615008316485": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -472,7 +1012,11 @@
             "DependsOn": [
               "ApiGatewayMethodAny",
               "ApiGatewayMethodProxyVarAny",
-              "ApiGatewayMethodGenresGet"
+              "ApiGatewayMethodGenresGet",
+              "ApiGatewayMethodArtistsForGenreProxyVarGet",
+              "ApiGatewayMethodAlbumsForArtistProxyVarGet",
+              "ApiGatewayMethodSongsForAlbumProxyVarGet",
+              "ApiGatewayMethodSongProxyVarGet"
             ]
           },
           "AppLambdaPermissionApiGateway": {
@@ -518,6 +1062,154 @@
               "FunctionName": {
                 "Fn::GetAtt": [
                   "GetGenresLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "GetArtistsByGenreLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetArtistsByGenreLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "GetAlbumsByArtistLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetAlbumsByArtistLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "GetSongsByAlbumLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetSongsByAlbumLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "GetSongLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetSongLambdaFunction",
                   "Arn"
                 ]
               },
@@ -611,13 +1303,37 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionViobw3b4eKGnVH1Lfq8df9mbRbNyA5HtkzWpRCwoVQg"
+              "Ref": "AppLambdaVersionAMWxPqjEPSfnoJSRx5NrbCjGFw5UVtWSRbGcPmKZcU"
             }
           },
           "GetGenresLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetGenresLambdaVersionMu161qfkZvpcXin4oq9C51uYlWGJ0bxSOzUp7ugtGE"
+              "Ref": "GetGenresLambdaVersionrANcsONkqKgfmIq59sIYOf9sx5S5Dk51jpfheSF0"
+            }
+          },
+          "GetArtistsByGenreLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetArtistsByGenreLambdaVersionqDJGxkWf6OMDlhNbunM108gQawHudnb3c25Zchdos4o"
+            }
+          },
+          "GetAlbumsByArtistLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetAlbumsByArtistLambdaVersion16HaTMs205nE9uvZ3btMMcNCel5UKxRj56VdRKN9w"
+            }
+          },
+          "GetSongsByAlbumLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetSongsByAlbumLambdaVersionRcyAQ03DBn24W1vCpKZ77Cq27jZoHPVZXYq4xtx00JQ"
+            }
+          },
+          "GetSongLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetSongLambdaVersionuYx1dAo4wLQA2y2WG4SKO1gvKVHzz5fIr3RDJQovVyU"
             }
           },
           "ServiceEndpoint": {
@@ -762,7 +1478,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersionViobw3b4eKGnVH1Lfq8df9mbRbNyA5HtkzWpRCwoVQg"
+        "versionLogicalId": "AppLambdaVersionAMWxPqjEPSfnoJSRx5NrbCjGFw5UVtWSRbGcPmKZcU"
       },
       "getGenres": {
         "handler": "index.handler",
@@ -777,7 +1493,67 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GetGenresLambdaVersionMu161qfkZvpcXin4oq9C51uYlWGJ0bxSOzUp7ugtGE"
+        "versionLogicalId": "GetGenresLambdaVersionrANcsONkqKgfmIq59sIYOf9sx5S5Dk51jpfheSF0"
+      },
+      "getArtistsByGenre": {
+        "handler": "index.handler",
+        "events": [
+          {
+            "http": "GET /artists/for/genre/{proxy+}"
+          }
+        ],
+        "name": "meusick-api-node-dev-getArtistsByGenre",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "GetArtistsByGenreLambdaVersionqDJGxkWf6OMDlhNbunM108gQawHudnb3c25Zchdos4o"
+      },
+      "getAlbumsByArtist": {
+        "handler": "index.handler",
+        "events": [
+          {
+            "http": "GET /albums/for/artist/{proxy+}"
+          }
+        ],
+        "name": "meusick-api-node-dev-getAlbumsByArtist",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "GetAlbumsByArtistLambdaVersion16HaTMs205nE9uvZ3btMMcNCel5UKxRj56VdRKN9w"
+      },
+      "getSongsByAlbum": {
+        "handler": "index.handler",
+        "events": [
+          {
+            "http": "GET /songs/for/album/{proxy+}"
+          }
+        ],
+        "name": "meusick-api-node-dev-getSongsByAlbum",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "GetSongsByAlbumLambdaVersionRcyAQ03DBn24W1vCpKZ77Cq27jZoHPVZXYq4xtx00JQ"
+      },
+      "getSong": {
+        "handler": "index.handler",
+        "events": [
+          {
+            "http": "GET /song/{proxy+}"
+          }
+        ],
+        "name": "meusick-api-node-dev-getSong",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "GetSongLambdaVersionuYx1dAo4wLQA2y2WG4SKO1gvKVHzz5fIr3RDJQovVyU"
       }
     },
     "resources": {
@@ -865,7 +1641,7 @@
     "artifact": "/Users/kristenorue/Documents/cs493/AWS-SAM-NODE/meusick-api/.serverless/meusick-api-node.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/meusick-api-node/dev/1615004113220-2021-03-06T04:15:13.220Z",
+    "artifactDirectoryName": "serverless/meusick-api-node/dev/1615008345796-2021-03-06T05:25:45.796Z",
     "artifact": "meusick-api-node.zip"
   }
 }
