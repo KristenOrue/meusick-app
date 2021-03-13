@@ -37,11 +37,43 @@ plugins:
   - serverless-iam-roles-per-function
 
 functions:
+#Add a lambda function to our servlerless.yaml that will handle the auth for us 
+  auth:
+    handler: auth.handler
+
+  sqs_function:
+    handler: index.handler
+    reservedConcurrency: 10 #Concurrency control
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - MyQueue
+              - Arn
+
+  hello:
+    handler: handler.api
+    events:
+      - http:
+          method: ANY
+          path: /{proxy+}
+          cors: true
+          authorizer:
+            name: auth
+            type: request
+            identitySource: method.request.header.authorization 
+
+
   app:
     handler: index.handler
     events:
       - http: ANY /
       - http: 'ANY /{proxy+}'
+
+  postPlay:
+    handler: index.handler
+    events:
+      - http: 'POST /play'
 
   getGenres:
     handler: index.handler
@@ -67,10 +99,17 @@ functions:
     handler: index.handler
     events: 
       - http: 'GET /song/{proxy+}'
+  
+
 
 
 resources:
   Resources:
+    MyQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "MyQueue"
+
     MusicDynamoDBTable:
       Type: 'AWS::DynamoDB::Table'
       Properties:
@@ -167,12 +206,6 @@ resources:
   #         method: get
 
 
-  # hello:
-  #   handler: handler.api
-  #   events:
-  #     - httpApi:
-  #         path: /ex
-  #         method: get
   # s3file:
   #   handler: handlerS3.hello
   #   iamRoleStatements:

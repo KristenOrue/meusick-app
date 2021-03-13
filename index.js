@@ -173,7 +173,7 @@ app.get('/song/:song', function (req, res) {
 // })
 
 // Create genre endpoint
-app.post('/genre', function (req, res) {
+app.post('/play', function (req, res) {
   const { genre, artist, album, song} = req.body;
   if (typeof genre!== 'string') {
     res.status(400).json({ error: '"Genre" must be a string' });
@@ -184,7 +184,6 @@ app.post('/genre', function (req, res) {
   const params = {
     TableName: MUSIC_TABLE,
     Item: {
-      genre: genre,
       artist: artist,
       album: album,
       song: song
