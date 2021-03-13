@@ -173,8 +173,8 @@ app.get('/song/:song', function (req, res) {
 // })
 
 // Create genre endpoint
-app.post('/play', function (req, res) {
-  const { genre, artist, album, song} = req.body;
+app.post('/play/:artist', function (req, res) {
+  const { artist, album, song} = req.body;
   if (typeof genre!== 'string') {
     res.status(400).json({ error: '"Genre" must be a string' });
   } else if (typeof artist !== 'string') {
@@ -183,11 +183,19 @@ app.post('/play', function (req, res) {
 
   const params = {
     TableName: MUSIC_TABLE,
-    Item: {
+    JSON.stringify({
       artist: artist,
       album: album,
       song: song
-    },
+      // artist: req.body.artist,
+      // album: req.body.album,
+      // song: req.body.song
+    }),
+    // Item: {
+    //   artist: artist,
+    //   album: album,
+    //   song: song
+    // },
   };
 
   dynamoDb.put(params, (error) => {

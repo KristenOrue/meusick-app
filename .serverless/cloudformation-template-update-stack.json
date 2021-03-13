@@ -253,7 +253,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615673684036-2021-03-13T22:14:44.036Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615676021542-2021-03-13T22:53:41.542Z/meusick-api-node.zip"
         },
         "Handler": "auth.handler",
         "Runtime": "nodejs12.x",
@@ -284,7 +284,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615673684036-2021-03-13T22:14:44.036Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615676021542-2021-03-13T22:53:41.542Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -316,7 +316,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615673684036-2021-03-13T22:14:44.036Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615676021542-2021-03-13T22:53:41.542Z/meusick-api-node.zip"
         },
         "Handler": "handler.api",
         "Runtime": "nodejs12.x",
@@ -347,7 +347,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615673684036-2021-03-13T22:14:44.036Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615676021542-2021-03-13T22:53:41.542Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -378,7 +378,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615673684036-2021-03-13T22:14:44.036Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615676021542-2021-03-13T22:53:41.542Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -409,7 +409,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615673684036-2021-03-13T22:14:44.036Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615676021542-2021-03-13T22:53:41.542Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -440,7 +440,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615673684036-2021-03-13T22:14:44.036Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615676021542-2021-03-13T22:53:41.542Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -471,7 +471,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615673684036-2021-03-13T22:14:44.036Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615676021542-2021-03-13T22:53:41.542Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -502,7 +502,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615673684036-2021-03-13T22:14:44.036Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615676021542-2021-03-13T22:53:41.542Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -533,7 +533,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615673684036-2021-03-13T22:14:44.036Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615676021542-2021-03-13T22:53:41.542Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -557,104 +557,104 @@
         "GetSongLogGroup"
       ]
     },
-    "AuthLambdaVersion8XMwKFrGeXaPmYf94Tl3oR5RyyuYbkYWatVTQRxek": {
+    "AuthLambdaVersionrHHSsKBZIywAJ3SpO46u0ZUJW7FhN3pGfyXcHMZx7HY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AuthLambdaFunction"
         },
-        "CodeSha256": "axDYQpf3rBm/JppK6xkiWDqZ1z2okjEW2DUYbjxZXuM="
+        "CodeSha256": "ef55IKumyJdcUdHEIt91rwgqhF8Y8vk0eA3vboP3pGo="
       }
     },
-    "SqsUnderscorefunctionLambdaVersionMfFK8fd1xK0E4HjbX2av8N5UQxHDSu7xKnbbSdgERM": {
+    "SqsUnderscorefunctionLambdaVersionqSIUrjakigovIVZVnCVYOJExV60yFxgbOdxPMDcztZk": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SqsUnderscorefunctionLambdaFunction"
         },
-        "CodeSha256": "axDYQpf3rBm/JppK6xkiWDqZ1z2okjEW2DUYbjxZXuM="
+        "CodeSha256": "ef55IKumyJdcUdHEIt91rwgqhF8Y8vk0eA3vboP3pGo="
       }
     },
-    "HelloLambdaVersionmGuLpdllPBZBL9ybMIdJHKlNbmLAJySuvbVPdWcrPI8": {
+    "HelloLambdaVersionmFv0Zc0dV7qJtYvJEaCrVQftZ2jy2zSKMywLsAIRdN8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HelloLambdaFunction"
         },
-        "CodeSha256": "axDYQpf3rBm/JppK6xkiWDqZ1z2okjEW2DUYbjxZXuM="
+        "CodeSha256": "ef55IKumyJdcUdHEIt91rwgqhF8Y8vk0eA3vboP3pGo="
       }
     },
-    "AppLambdaVersionNaNlbGWmpJMWrXOR0MxZsrXS5Xuy2PkRDokvqR7FXY": {
+    "AppLambdaVersionCGKYzxIuFeku648UH8zEYSbdBy9Axoey3caKe5qeqp4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AppLambdaFunction"
         },
-        "CodeSha256": "axDYQpf3rBm/JppK6xkiWDqZ1z2okjEW2DUYbjxZXuM="
+        "CodeSha256": "ef55IKumyJdcUdHEIt91rwgqhF8Y8vk0eA3vboP3pGo="
       }
     },
-    "PostPlayLambdaVersionjyjYaSm0zWoeirAjzx6IJ3qI4DBtkWeqalUU4qgZy5Y": {
+    "PostPlayLambdaVersionYVZzXE5NKIMs8qLvjt5Rf8jbYgDCNco8jfwtqih0sAs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "PostPlayLambdaFunction"
         },
-        "CodeSha256": "axDYQpf3rBm/JppK6xkiWDqZ1z2okjEW2DUYbjxZXuM="
+        "CodeSha256": "ef55IKumyJdcUdHEIt91rwgqhF8Y8vk0eA3vboP3pGo="
       }
     },
-    "GetGenresLambdaVersion0qlZJCvXVwrzfOWFCnPcPXBIn57XHESjtygEPCKjwd0": {
+    "GetGenresLambdaVersionSZsV1xSfNmcH5gT7wOz8ggEhXkKy8NSIQWSLnlpCKw": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetGenresLambdaFunction"
         },
-        "CodeSha256": "axDYQpf3rBm/JppK6xkiWDqZ1z2okjEW2DUYbjxZXuM="
+        "CodeSha256": "ef55IKumyJdcUdHEIt91rwgqhF8Y8vk0eA3vboP3pGo="
       }
     },
-    "GetArtistsByGenreLambdaVersioneqAuOgtFSFTIlV5AOlYvMdGe3QHVaJb3x7zpvjsEvg": {
+    "GetArtistsByGenreLambdaVersionZn8ReGUsmnkLrz4NW3j7qu7ZOwLdprboqUUrFPcbg": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetArtistsByGenreLambdaFunction"
         },
-        "CodeSha256": "axDYQpf3rBm/JppK6xkiWDqZ1z2okjEW2DUYbjxZXuM="
+        "CodeSha256": "ef55IKumyJdcUdHEIt91rwgqhF8Y8vk0eA3vboP3pGo="
       }
     },
-    "GetAlbumsByArtistLambdaVersionrddIQ75ZuBzEmlkZOtTpHf7SGUGNazcRBOCVFlojFQ": {
+    "GetAlbumsByArtistLambdaVersionSI23YAR0WpPkLfmgqOyZFbyRgYWdnBb1ePw2gebdE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetAlbumsByArtistLambdaFunction"
         },
-        "CodeSha256": "axDYQpf3rBm/JppK6xkiWDqZ1z2okjEW2DUYbjxZXuM="
+        "CodeSha256": "ef55IKumyJdcUdHEIt91rwgqhF8Y8vk0eA3vboP3pGo="
       }
     },
-    "GetSongsByAlbumLambdaVersionGRGffuuEkuzrlIEFMchcDsZfkEiRThAluYxmcxgc": {
+    "GetSongsByAlbumLambdaVersionEkr0iaWuuCPolJDl5BKyvsmZ0Ko5pYNLjZwe6fRNOhA": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetSongsByAlbumLambdaFunction"
         },
-        "CodeSha256": "axDYQpf3rBm/JppK6xkiWDqZ1z2okjEW2DUYbjxZXuM="
+        "CodeSha256": "ef55IKumyJdcUdHEIt91rwgqhF8Y8vk0eA3vboP3pGo="
       }
     },
-    "GetSongLambdaVersionHUPLg7SZoIpwhrYTFqIAR1Tv8Ds6uGQZzzZiEo": {
+    "GetSongLambdaVersionDmPBnPY3iT3tyif3ntOr8rmzH5DRDnMiewpI7HXztDE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetSongLambdaFunction"
         },
-        "CodeSha256": "axDYQpf3rBm/JppK6xkiWDqZ1z2okjEW2DUYbjxZXuM="
+        "CodeSha256": "ef55IKumyJdcUdHEIt91rwgqhF8Y8vk0eA3vboP3pGo="
       }
     },
     "ApiGatewayRestApi": {
@@ -694,6 +694,18 @@
           ]
         },
         "PathPart": "play",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourcePlayProxyVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourcePlay"
+        },
+        "PathPart": "{proxy+}",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -1032,13 +1044,13 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayMethodPlayPost": {
+    "ApiGatewayMethodPlayProxyVarPost": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
         "HttpMethod": "POST",
         "RequestParameters": {},
         "ResourceId": {
-          "Ref": "ApiGatewayResourcePlay"
+          "Ref": "ApiGatewayResourcePlayProxyVar"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -1325,7 +1337,7 @@
         "Type": "REQUEST"
       }
     },
-    "ApiGatewayDeployment1615673660540": {
+    "ApiGatewayDeployment1615675996313": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1338,7 +1350,7 @@
         "ApiGatewayMethodProxyVarAny",
         "ApiGatewayMethodAny",
         "ApiGatewayMethodProxyVarAny",
-        "ApiGatewayMethodPlayPost",
+        "ApiGatewayMethodPlayProxyVarPost",
         "ApiGatewayMethodGenresGet",
         "ApiGatewayMethodArtistsForGenreProxyVarGet",
         "ApiGatewayMethodAlbumsForArtistProxyVarGet",
@@ -1769,61 +1781,61 @@
     "AuthLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AuthLambdaVersion8XMwKFrGeXaPmYf94Tl3oR5RyyuYbkYWatVTQRxek"
+        "Ref": "AuthLambdaVersionrHHSsKBZIywAJ3SpO46u0ZUJW7FhN3pGfyXcHMZx7HY"
       }
     },
     "SqsUnderscorefunctionLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SqsUnderscorefunctionLambdaVersionMfFK8fd1xK0E4HjbX2av8N5UQxHDSu7xKnbbSdgERM"
+        "Ref": "SqsUnderscorefunctionLambdaVersionqSIUrjakigovIVZVnCVYOJExV60yFxgbOdxPMDcztZk"
       }
     },
     "HelloLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HelloLambdaVersionmGuLpdllPBZBL9ybMIdJHKlNbmLAJySuvbVPdWcrPI8"
+        "Ref": "HelloLambdaVersionmFv0Zc0dV7qJtYvJEaCrVQftZ2jy2zSKMywLsAIRdN8"
       }
     },
     "AppLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AppLambdaVersionNaNlbGWmpJMWrXOR0MxZsrXS5Xuy2PkRDokvqR7FXY"
+        "Ref": "AppLambdaVersionCGKYzxIuFeku648UH8zEYSbdBy9Axoey3caKe5qeqp4"
       }
     },
     "PostPlayLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "PostPlayLambdaVersionjyjYaSm0zWoeirAjzx6IJ3qI4DBtkWeqalUU4qgZy5Y"
+        "Ref": "PostPlayLambdaVersionYVZzXE5NKIMs8qLvjt5Rf8jbYgDCNco8jfwtqih0sAs"
       }
     },
     "GetGenresLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetGenresLambdaVersion0qlZJCvXVwrzfOWFCnPcPXBIn57XHESjtygEPCKjwd0"
+        "Ref": "GetGenresLambdaVersionSZsV1xSfNmcH5gT7wOz8ggEhXkKy8NSIQWSLnlpCKw"
       }
     },
     "GetArtistsByGenreLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetArtistsByGenreLambdaVersioneqAuOgtFSFTIlV5AOlYvMdGe3QHVaJb3x7zpvjsEvg"
+        "Ref": "GetArtistsByGenreLambdaVersionZn8ReGUsmnkLrz4NW3j7qu7ZOwLdprboqUUrFPcbg"
       }
     },
     "GetAlbumsByArtistLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetAlbumsByArtistLambdaVersionrddIQ75ZuBzEmlkZOtTpHf7SGUGNazcRBOCVFlojFQ"
+        "Ref": "GetAlbumsByArtistLambdaVersionSI23YAR0WpPkLfmgqOyZFbyRgYWdnBb1ePw2gebdE"
       }
     },
     "GetSongsByAlbumLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetSongsByAlbumLambdaVersionGRGffuuEkuzrlIEFMchcDsZfkEiRThAluYxmcxgc"
+        "Ref": "GetSongsByAlbumLambdaVersionEkr0iaWuuCPolJDl5BKyvsmZ0Ko5pYNLjZwe6fRNOhA"
       }
     },
     "GetSongLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetSongLambdaVersionHUPLg7SZoIpwhrYTFqIAR1Tv8Ds6uGQZzzZiEo"
+        "Ref": "GetSongLambdaVersionDmPBnPY3iT3tyif3ntOr8rmzH5DRDnMiewpI7HXztDE"
       }
     },
     "ServiceEndpoint": {

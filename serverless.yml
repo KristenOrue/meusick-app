@@ -73,7 +73,7 @@ functions:
   postPlay:
     handler: index.handler
     events:
-      - http: 'POST /play'
+      - http: 'POST /play/{proxy+}'
 
   getGenres:
     handler: index.handler
