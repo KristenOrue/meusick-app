@@ -9,6 +9,7 @@ var s3 = new AWS.S3({signatureVersion: 'v4', region:"us-west-2"});
 
 const MUSIC_TABLE = process.env.MUSIC_TABLE;
 const IS_OFFLINE = process.env.IS_OFFLINE;
+const QUEUE_URL = 'https://sqs.us-east-1.amazonaws.com/589772831734/MyQueue';
 
 let dynamoDb;
 if (IS_OFFLINE === 'true') {
@@ -41,7 +42,6 @@ app.get('/genres', function (req, res) {
       ':pk': "genre"
     },
   }
-
   dynamoDb.query(params, function(err, data) {
      if (err) console.log(err);
      else {
@@ -173,38 +173,33 @@ app.get('/song/:song', function (req, res) {
 // })
 
 // Create genre endpoint
-app.post('/play/:artist', function (req, res) {
-  const { artist, album, song} = req.body;
-  if (typeof genre!== 'string') {
-    res.status(400).json({ error: '"Genre" must be a string' });
-  } else if (typeof artist !== 'string') {
-    res.status(400).json({ error: '"Artist" must be a string' });
-  }
-
+app.post('/play', function (req, res) {
   const params = {
     TableName: MUSIC_TABLE,
-    JSON.stringify({
-      artist: artist,
-      album: album,
-      song: song
-      // artist: req.body.artist,
-      // album: req.body.album,
-      // song: req.body.song
+    MessageBody: JSON.stringify({
+      artist: req.body.artist,
+      album: req.body.album,
+      song: req.body.song
     }),
+    QueueUrl: QUEUE_URL
     // Item: {
     //   artist: artist,
     //   album: album,
     //   song: song
     // },
   };
-
-  dynamoDb.put(params, (error) => {
-    if (error) {
-      console.log(error);
-      res.status(400).json({ error: 'Could not create Genre' });
-    }
-    res.json({ genre, artist, album, song });
+  sqs.sendMessageBatch(params, function(err, data) {
+    if (err) console.log(err, err.stack); // an error occurred
+    else     console.log(data);           // successful response
   });
-})
+
+//   dynamoDb.put(params, (error) => {
+//     if (error) {
+//       console.log(error);
+//       res.status(400).json({ error: 'Could not create Genre' });
+//     }
+//     res.json({ genre, artist, album, song });
+//   });
+// })
 
 module.exports.handler = serverless(app);
