@@ -71,6 +71,12 @@
         }
       }
     },
+    "AuthLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/meusick-api-node-dev-auth"
+      }
+    },
     "SqsUnderscorefunctionLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
@@ -242,6 +248,37 @@
         }
       }
     },
+    "AuthLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/meusick-api-node/dev/1615933678865-2021-03-16T22:27:58.865Z/meusick-api-node.zip"
+        },
+        "Handler": "auth.handler",
+        "Runtime": "nodejs12.x",
+        "FunctionName": "meusick-api-node-dev-auth",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "MUSIC_TABLE": "music",
+            "SERVERLESS_EXPRESS_PLATFORM": "aws"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "AuthLogGroup"
+      ]
+    },
     "SqsUnderscorefunctionLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
@@ -249,7 +286,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615871341196-2021-03-16T05:09:01.196Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615933678865-2021-03-16T22:27:58.865Z/meusick-api-node.zip"
         },
         "Handler": "handlersqs.handler",
         "Runtime": "nodejs12.x",
@@ -281,7 +318,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615871341196-2021-03-16T05:09:01.196Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615933678865-2021-03-16T22:27:58.865Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -312,7 +349,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615871341196-2021-03-16T05:09:01.196Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615933678865-2021-03-16T22:27:58.865Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -343,7 +380,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615871341196-2021-03-16T05:09:01.196Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615933678865-2021-03-16T22:27:58.865Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -374,7 +411,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615871341196-2021-03-16T05:09:01.196Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615933678865-2021-03-16T22:27:58.865Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -405,7 +442,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615871341196-2021-03-16T05:09:01.196Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615933678865-2021-03-16T22:27:58.865Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -436,7 +473,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615871341196-2021-03-16T05:09:01.196Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615933678865-2021-03-16T22:27:58.865Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -467,7 +504,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615871341196-2021-03-16T05:09:01.196Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615933678865-2021-03-16T22:27:58.865Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -498,7 +535,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615871341196-2021-03-16T05:09:01.196Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615933678865-2021-03-16T22:27:58.865Z/meusick-api-node.zip"
         },
         "Handler": "handlerS3.hello",
         "Runtime": "nodejs12.x",
@@ -522,6 +559,16 @@
         "S3fileIamRoleLambdaExecution",
         "S3fileLogGroup"
       ]
+    },
+    "AuthLambdaVersionqKGDObsjeMdiMtQtXsz9KqsKx6r6ubjy9bYPbQ5Dhmg": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "AuthLambdaFunction"
+        },
+        "CodeSha256": "cfRPowQYm9cESiEPEh1twqajQ3qec67acV1vXs4ZZlw="
+      }
     },
     "SqsUnderscorefunctionLambdaVersionkxNK176jSRTfWDs8H0J2t5g6mXaXeIm2zETMGdkRmg": {
       "Type": "AWS::Lambda::Version",
@@ -850,6 +897,98 @@
         }
       }
     },
+    "ApiGatewayMethodProxyVarOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT'"
+              },
+              "ResponseTemplates": {
+                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceProxyVar"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodPlayOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Credentials": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,Access-Control-Allow-Origin,Access-Control-Request-Headers,Access-Control-Request-Method'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'",
+                "method.response.header.Access-Control-Allow-Credentials": "'true'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourcePlay"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
     "ApiGatewayMethodAny": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
@@ -908,7 +1047,10 @@
           "Ref": "ApiGatewayRestApi"
         },
         "ApiKeyRequired": false,
-        "AuthorizationType": "NONE",
+        "AuthorizationType": "CUSTOM",
+        "AuthorizerId": {
+          "Ref": "AuthApiGatewayAuthorizer"
+        },
         "Integration": {
           "IntegrationHttpMethod": "POST",
           "Type": "AWS_PROXY",
@@ -937,7 +1079,8 @@
           }
         },
         "MethodResponses": []
-      }
+      },
+      "DependsOn": "AuthApiGatewayAuthorizer"
     },
     "ApiGatewayMethodPlayPost": {
       "Type": "AWS::ApiGateway::Method",
@@ -1197,7 +1340,42 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1615871306950": {
+    "AuthApiGatewayAuthorizer": {
+      "Type": "AWS::ApiGateway::Authorizer",
+      "Properties": {
+        "AuthorizerResultTtlInSeconds": 300,
+        "IdentitySource": "method.request.header.authorization",
+        "Name": "auth",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "AuthorizerUri": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":apigateway:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":lambda:path/2015-03-31/functions/",
+              {
+                "Fn::GetAtt": [
+                  "AuthLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "/invocations"
+            ]
+          ]
+        },
+        "Type": "REQUEST"
+      }
+    },
+    "ApiGatewayDeployment1615933644956": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1206,6 +1384,8 @@
         "StageName": "dev"
       },
       "DependsOn": [
+        "ApiGatewayMethodProxyVarOptions",
+        "ApiGatewayMethodPlayOptions",
         "ApiGatewayMethodAny",
         "ApiGatewayMethodProxyVarAny",
         "ApiGatewayMethodPlayPost",
@@ -1222,6 +1402,43 @@
         "FunctionName": {
           "Fn::GetAtt": [
             "AppLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "AuthLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "AuthLambdaFunction",
             "Arn"
           ]
         },
@@ -1745,6 +1962,12 @@
     "ServerlessDeploymentBucketName": {
       "Value": {
         "Ref": "ServerlessDeploymentBucket"
+      }
+    },
+    "AuthLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "AuthLambdaVersionqKGDObsjeMdiMtQtXsz9KqsKx6r6ubjy9bYPbQ5Dhmg"
       }
     },
     "SqsUnderscorefunctionLambdaFunctionQualifiedArn": {
