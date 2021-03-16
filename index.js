@@ -10,6 +10,7 @@ var s3 = new AWS.S3({signatureVersion: 'v4', region:"us-west-2"});
 const MUSIC_TABLE = process.env.MUSIC_TABLE;
 const IS_OFFLINE = process.env.IS_OFFLINE;
 const QUEUE_URL = 'https://sqs.us-east-1.amazonaws.com/589772831734/MyQueue';
+const sqsClient = new AWS.SQS({region: 'us-east-1'});
 
 let dynamoDb;
 if (IS_OFFLINE === 'true') {
@@ -149,50 +150,25 @@ app.get('/song/:song', function (req, res) {
   });
 })
 
-// Get Genre endpoint
-// app.get('/genre/:genre', function (req, res) {
-//   const params = {
-//     TableName: MUSIC_TABLE,
-//     Key: {
-//       genre: req.params.genre,
-//     },
-//   }
-
-//   dynamoDb.get(params, (error, result) => {
-//     if (error) {
-//       console.log(error);
-//       res.status(400).json({ error: 'Could not get genre' });
-//     }
-//     if (result.Item) {
-//       const {genre, artist, album, song} = result.Item;
-//       res.json({ genre, artist, album, song });
-//     } else {
-//       res.status(404).json({ error: "Genre not found" });
-//     }
-//   });
-// })
-
-// Create genre endpoint
+// Create play endpoint
 app.post('/play', function (req, res) {
   const params = {
-    TableName: MUSIC_TABLE,
+    // TableName: MUSIC_TABLE,
     MessageBody: JSON.stringify({
       artist: req.body.artist,
       album: req.body.album,
       song: req.body.song
     }),
     QueueUrl: QUEUE_URL
-    // Item: {
-    //   artist: artist,
-    //   album: album,
-    //   song: song
-    // },
   };
-  sqs.sendMessageBatch(params, function(err, data) {
-    if (err) console.log(err, err.stack); // an error occurred
-    else     console.log(data);           // successful response
+  sqsClient.sendMessage(params, function(err, data) {
+    if (err) {
+      console.log("You done Fucked up", err); // an error occurred
+    } else {
+      console.log("Success", data.MessageId);
+    }           // successful response
   });
-
+})
 //   dynamoDb.put(params, (error) => {
 //     if (error) {
 //       console.log(error);

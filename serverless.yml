@@ -23,9 +23,11 @@ provider:
         - s3:ListBucket
         - s3:GetObject
         - s3:ListObjects
-
+        - sqs:*
+             
       Resource:
         - { "Fn::GetAtt": ["MusicDynamoDBTable", "Arn" ] }
+        - "arn:aws:sqs:us-east-1:589772831734:MyQueue"
   environment:
     MUSIC_TABLE: ${self:custom.tableName}
 
@@ -38,8 +40,8 @@ plugins:
 
 functions:
 #Add a lambda function to our servlerless.yaml that will handle the auth for us 
-  auth:
-    handler: auth.handler
+  # auth:
+  #   handler: auth.handler
 
   sqs_function:
     handler: index.handler
@@ -51,19 +53,19 @@ functions:
               - MyQueue
               - Arn
 
-  hello:
-    handler: handler.api
-    events:
-      - http:
-          method: ANY
-          path: /{proxy+}
-          cors: true
-          authorizer:
-            name: auth
-            type: request
-            identitySource: method.request.header.authorization 
+  # hello:
+  #   handler: handler.api
+  #   events:
+  #     - http:
+  #         method: ANY
+  #         path: /{proxy+}
+  #         cors: true
+  #         authorizer:
+  #           name: auth
+  #           type: request
+  #           identitySource: method.request.header.authorization 
 
-
+#Assignment AWSDDB-Part 2:
   app:
     handler: index.handler
     events:
@@ -99,7 +101,29 @@ functions:
     handler: index.handler
     events: 
       - http: 'GET /song/{proxy+}'
-  
+
+#Created for AW S3 & Servless:
+  s3file:
+    handler: handlerS3.hello
+    iamRoleStatements:
+      - Effect: 'Allow'
+        Action:
+          - 's3:ListBucket'
+        Resource: "arn:aws:s3:::meusick-bucket"
+
+      - Effect: 'Allow'
+        Action:
+          - 's3:GetObject'
+        Resource: "arn:aws:s3:::meusick-bucket"
+
+      - Effect: 'Allow'
+        Action:
+          - 's3:ListObjects'
+        Resource: "arn:aws:s3:::meusick-bucket"
+    events:
+      - httpApi:
+          path: /s3file
+          method: get
 
 
 

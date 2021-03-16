@@ -71,22 +71,10 @@
         }
       }
     },
-    "AuthLogGroup": {
-      "Type": "AWS::Logs::LogGroup",
-      "Properties": {
-        "LogGroupName": "/aws/lambda/meusick-api-node-dev-auth"
-      }
-    },
     "SqsUnderscorefunctionLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
         "LogGroupName": "/aws/lambda/meusick-api-node-dev-sqs_function"
-      }
-    },
-    "HelloLogGroup": {
-      "Type": "AWS::Logs::LogGroup",
-      "Properties": {
-        "LogGroupName": "/aws/lambda/meusick-api-node-dev-hello"
       }
     },
     "AppLogGroup": {
@@ -129,6 +117,12 @@
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
         "LogGroupName": "/aws/lambda/meusick-api-node-dev-getSong"
+      }
+    },
+    "S3fileLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/meusick-api-node-dev-s3file"
       }
     },
     "IamRoleLambdaExecution": {
@@ -199,7 +193,8 @@
                     "dynamodb:DeleteItem",
                     "s3:ListBucket",
                     "s3:GetObject",
-                    "s3:ListObjects"
+                    "s3:ListObjects",
+                    "sqs:*"
                   ],
                   "Resource": [
                     {
@@ -207,7 +202,8 @@
                         "MusicDynamoDBTable",
                         "Arn"
                       ]
-                    }
+                    },
+                    "arn:aws:sqs:us-east-1:589772831734:MyQueue"
                   ]
                 },
                 {
@@ -246,37 +242,6 @@
         }
       }
     },
-    "AuthLambdaFunction": {
-      "Type": "AWS::Lambda::Function",
-      "Properties": {
-        "Code": {
-          "S3Bucket": {
-            "Ref": "ServerlessDeploymentBucket"
-          },
-          "S3Key": "serverless/meusick-api-node/dev/1615681676061-2021-03-14T00:27:56.061Z/meusick-api-node.zip"
-        },
-        "Handler": "auth.handler",
-        "Runtime": "nodejs12.x",
-        "FunctionName": "meusick-api-node-dev-auth",
-        "MemorySize": 1024,
-        "Timeout": 6,
-        "Environment": {
-          "Variables": {
-            "MUSIC_TABLE": "music",
-            "SERVERLESS_EXPRESS_PLATFORM": "aws"
-          }
-        },
-        "Role": {
-          "Fn::GetAtt": [
-            "IamRoleLambdaExecution",
-            "Arn"
-          ]
-        }
-      },
-      "DependsOn": [
-        "AuthLogGroup"
-      ]
-    },
     "SqsUnderscorefunctionLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
@@ -284,7 +249,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615681676061-2021-03-14T00:27:56.061Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615852653947-2021-03-15T23:57:33.947Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -309,37 +274,6 @@
         "SqsUnderscorefunctionLogGroup"
       ]
     },
-    "HelloLambdaFunction": {
-      "Type": "AWS::Lambda::Function",
-      "Properties": {
-        "Code": {
-          "S3Bucket": {
-            "Ref": "ServerlessDeploymentBucket"
-          },
-          "S3Key": "serverless/meusick-api-node/dev/1615681676061-2021-03-14T00:27:56.061Z/meusick-api-node.zip"
-        },
-        "Handler": "handler.api",
-        "Runtime": "nodejs12.x",
-        "FunctionName": "meusick-api-node-dev-hello",
-        "MemorySize": 1024,
-        "Timeout": 6,
-        "Environment": {
-          "Variables": {
-            "MUSIC_TABLE": "music",
-            "SERVERLESS_EXPRESS_PLATFORM": "aws"
-          }
-        },
-        "Role": {
-          "Fn::GetAtt": [
-            "IamRoleLambdaExecution",
-            "Arn"
-          ]
-        }
-      },
-      "DependsOn": [
-        "HelloLogGroup"
-      ]
-    },
     "AppLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
@@ -347,7 +281,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615681676061-2021-03-14T00:27:56.061Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615852653947-2021-03-15T23:57:33.947Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -378,7 +312,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615681676061-2021-03-14T00:27:56.061Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615852653947-2021-03-15T23:57:33.947Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -409,7 +343,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615681676061-2021-03-14T00:27:56.061Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615852653947-2021-03-15T23:57:33.947Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -440,7 +374,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615681676061-2021-03-14T00:27:56.061Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615852653947-2021-03-15T23:57:33.947Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -471,7 +405,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615681676061-2021-03-14T00:27:56.061Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615852653947-2021-03-15T23:57:33.947Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -502,7 +436,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615681676061-2021-03-14T00:27:56.061Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615852653947-2021-03-15T23:57:33.947Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -533,7 +467,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1615681676061-2021-03-14T00:27:56.061Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api-node/dev/1615852653947-2021-03-15T23:57:33.947Z/meusick-api-node.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
@@ -557,104 +491,126 @@
         "GetSongLogGroup"
       ]
     },
-    "AuthLambdaVersionDF0TibXthrbe6ABE5rcAVZuqKSHmYS2U84DeZla8": {
-      "Type": "AWS::Lambda::Version",
-      "DeletionPolicy": "Retain",
+    "S3fileLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
       "Properties": {
-        "FunctionName": {
-          "Ref": "AuthLambdaFunction"
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/meusick-api-node/dev/1615852653947-2021-03-15T23:57:33.947Z/meusick-api-node.zip"
         },
-        "CodeSha256": "Cn3F/bIK2eMoUnfBGwxIbXVnDVfAsZV241SHl7FhGUA="
-      }
+        "Handler": "handlerS3.hello",
+        "Runtime": "nodejs12.x",
+        "FunctionName": "meusick-api-node-dev-s3file",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "MUSIC_TABLE": "music",
+            "SERVERLESS_EXPRESS_PLATFORM": "aws"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "S3fileIamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "S3fileIamRoleLambdaExecution",
+        "S3fileLogGroup"
+      ]
     },
-    "SqsUnderscorefunctionLambdaVersionSwFQ17W2plAhCl8CiLaAln8mTC7ijTfTTd3jYD9beM": {
+    "SqsUnderscorefunctionLambdaVersionT8Ew6SKEHCYJVykvZtpDNB7reE3hmzotyI3xqJAY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SqsUnderscorefunctionLambdaFunction"
         },
-        "CodeSha256": "Cn3F/bIK2eMoUnfBGwxIbXVnDVfAsZV241SHl7FhGUA="
+        "CodeSha256": "hnuh473DVSUw9UZfUdcF2arFq1/TlgAEYaAPgEZcZ1M="
       }
     },
-    "HelloLambdaVersionc94Y2jL4XtN4uEDRSRSFSeNYyfiAVytLtirfiDlc": {
-      "Type": "AWS::Lambda::Version",
-      "DeletionPolicy": "Retain",
-      "Properties": {
-        "FunctionName": {
-          "Ref": "HelloLambdaFunction"
-        },
-        "CodeSha256": "Cn3F/bIK2eMoUnfBGwxIbXVnDVfAsZV241SHl7FhGUA="
-      }
-    },
-    "AppLambdaVersionIAuPsHqCZPvoUAMn2OsrbSCNlsDCy5EIaFEJLS70U": {
+    "AppLambdaVersionPUgFKeFLKwNzAQJ9Yi8IDXiXFcx546cJvLFPps4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AppLambdaFunction"
         },
-        "CodeSha256": "Cn3F/bIK2eMoUnfBGwxIbXVnDVfAsZV241SHl7FhGUA="
+        "CodeSha256": "hnuh473DVSUw9UZfUdcF2arFq1/TlgAEYaAPgEZcZ1M="
       }
     },
-    "PostPlayLambdaVersionUPpUCp583eNjGuDULPkaPltmPxfd1bqjGdIH58XHo": {
+    "PostPlayLambdaVersioni6FY95Ly2RVAADJ1n6PBgUsXjIC2uWNCrcPDvgANU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "PostPlayLambdaFunction"
         },
-        "CodeSha256": "Cn3F/bIK2eMoUnfBGwxIbXVnDVfAsZV241SHl7FhGUA="
+        "CodeSha256": "hnuh473DVSUw9UZfUdcF2arFq1/TlgAEYaAPgEZcZ1M="
       }
     },
-    "GetGenresLambdaVersionSky6iPcHfPHBvONe3sC67UYLL6e3uQJ1T6qTSWE9aBU": {
+    "GetGenresLambdaVersionmiYlQo6jjzbCm4WX0wrAC4akDOqJZdhg5m5Z5hC12w4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetGenresLambdaFunction"
         },
-        "CodeSha256": "Cn3F/bIK2eMoUnfBGwxIbXVnDVfAsZV241SHl7FhGUA="
+        "CodeSha256": "hnuh473DVSUw9UZfUdcF2arFq1/TlgAEYaAPgEZcZ1M="
       }
     },
-    "GetArtistsByGenreLambdaVersionv3Z9w3DDWECm942W9vf881jRJdZsUdhQrQxA2c2do": {
+    "GetArtistsByGenreLambdaVersionUMcIkW11oJ7XWqkXv6cFWtTKIaQpnGnClb6poM0zWM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetArtistsByGenreLambdaFunction"
         },
-        "CodeSha256": "Cn3F/bIK2eMoUnfBGwxIbXVnDVfAsZV241SHl7FhGUA="
+        "CodeSha256": "hnuh473DVSUw9UZfUdcF2arFq1/TlgAEYaAPgEZcZ1M="
       }
     },
-    "GetAlbumsByArtistLambdaVersion5MdEp1Vac8CgmpWvCGGCt1noLjkwKyST9cnGtMC0I": {
+    "GetAlbumsByArtistLambdaVersionKSP8LN5NA8opAY9Krob8vEMG3Icm1K7eg7XihbbLXkc": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetAlbumsByArtistLambdaFunction"
         },
-        "CodeSha256": "Cn3F/bIK2eMoUnfBGwxIbXVnDVfAsZV241SHl7FhGUA="
+        "CodeSha256": "hnuh473DVSUw9UZfUdcF2arFq1/TlgAEYaAPgEZcZ1M="
       }
     },
-    "GetSongsByAlbumLambdaVersionevBpVIEq3oq31gxvX0vcsFiu0FRhizUlL5lguDazwyM": {
+    "GetSongsByAlbumLambdaVersionwXj9OYCI4iHzEhx2ue3rH9qj9EttwsEWYZNPhOUVXY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetSongsByAlbumLambdaFunction"
         },
-        "CodeSha256": "Cn3F/bIK2eMoUnfBGwxIbXVnDVfAsZV241SHl7FhGUA="
+        "CodeSha256": "hnuh473DVSUw9UZfUdcF2arFq1/TlgAEYaAPgEZcZ1M="
       }
     },
-    "GetSongLambdaVersionPLRaVVPQL9YPmWf0sRiPeY1GiDreyg2VSzqehcGua4": {
+    "GetSongLambdaVersiondxgyCO9wswqXB0PTyelR6Ncf2NRtcBBxoihYRYzPJs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetSongLambdaFunction"
         },
-        "CodeSha256": "Cn3F/bIK2eMoUnfBGwxIbXVnDVfAsZV241SHl7FhGUA="
+        "CodeSha256": "hnuh473DVSUw9UZfUdcF2arFq1/TlgAEYaAPgEZcZ1M="
+      }
+    },
+    "S3fileLambdaVersionUFH4xmaDPK5aOjj0xn1hEEH9lntnmB8I52HSwRF3Kg0": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "S3fileLambdaFunction"
+        },
+        "CodeSha256": "hnuh473DVSUw9UZfUdcF2arFq1/TlgAEYaAPgEZcZ1M="
       }
     },
     "ApiGatewayRestApi": {
@@ -894,67 +850,22 @@
         }
       }
     },
-    "ApiGatewayMethodProxyVarOptions": {
-      "Type": "AWS::ApiGateway::Method",
-      "Properties": {
-        "AuthorizationType": "NONE",
-        "HttpMethod": "OPTIONS",
-        "MethodResponses": [
-          {
-            "StatusCode": "200",
-            "ResponseParameters": {
-              "method.response.header.Access-Control-Allow-Origin": true,
-              "method.response.header.Access-Control-Allow-Headers": true,
-              "method.response.header.Access-Control-Allow-Methods": true
-            },
-            "ResponseModels": {}
-          }
-        ],
-        "RequestParameters": {},
-        "Integration": {
-          "Type": "MOCK",
-          "RequestTemplates": {
-            "application/json": "{statusCode:200}"
-          },
-          "ContentHandling": "CONVERT_TO_TEXT",
-          "IntegrationResponses": [
-            {
-              "StatusCode": "200",
-              "ResponseParameters": {
-                "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
-                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT'"
-              },
-              "ResponseTemplates": {
-                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
-              }
-            }
-          ]
-        },
-        "ResourceId": {
-          "Ref": "ApiGatewayResourceProxyVar"
-        },
-        "RestApiId": {
-          "Ref": "ApiGatewayRestApi"
-        }
-      }
-    },
-    "ApiGatewayMethodProxyVarAny": {
+    "ApiGatewayMethodAny": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
         "HttpMethod": "ANY",
         "RequestParameters": {},
         "ResourceId": {
-          "Ref": "ApiGatewayResourceProxyVar"
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         },
         "ApiKeyRequired": false,
         "AuthorizationType": "NONE",
-        "AuthorizerId": {
-          "Ref": "AuthApiGatewayAuthorizer"
-        },
         "Integration": {
           "IntegrationHttpMethod": "POST",
           "Type": "AWS_PROXY",
@@ -983,19 +894,15 @@
           }
         },
         "MethodResponses": []
-      },
-      "DependsOn": "AuthApiGatewayAuthorizer"
+      }
     },
-    "ApiGatewayMethodAny": {
+    "ApiGatewayMethodProxyVarAny": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
         "HttpMethod": "ANY",
         "RequestParameters": {},
         "ResourceId": {
-          "Fn::GetAtt": [
-            "ApiGatewayRestApi",
-            "RootResourceId"
-          ]
+          "Ref": "ApiGatewayResourceProxyVar"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -1290,42 +1197,7 @@
         "MethodResponses": []
       }
     },
-    "AuthApiGatewayAuthorizer": {
-      "Type": "AWS::ApiGateway::Authorizer",
-      "Properties": {
-        "AuthorizerResultTtlInSeconds": 300,
-        "IdentitySource": "method.request.header.authorization",
-        "Name": "auth",
-        "RestApiId": {
-          "Ref": "ApiGatewayRestApi"
-        },
-        "AuthorizerUri": {
-          "Fn::Join": [
-            "",
-            [
-              "arn:",
-              {
-                "Ref": "AWS::Partition"
-              },
-              ":apigateway:",
-              {
-                "Ref": "AWS::Region"
-              },
-              ":lambda:path/2015-03-31/functions/",
-              {
-                "Fn::GetAtt": [
-                  "AuthLambdaFunction",
-                  "Arn"
-                ]
-              },
-              "/invocations"
-            ]
-          ]
-        },
-        "Type": "REQUEST"
-      }
-    },
-    "ApiGatewayDeployment1615681653238": {
+    "ApiGatewayDeployment1615852629231": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1334,8 +1206,6 @@
         "StageName": "dev"
       },
       "DependsOn": [
-        "ApiGatewayMethodProxyVarOptions",
-        "ApiGatewayMethodProxyVarAny",
         "ApiGatewayMethodAny",
         "ApiGatewayMethodProxyVarAny",
         "ApiGatewayMethodPlayPost",
@@ -1345,80 +1215,6 @@
         "ApiGatewayMethodSongsForAlbumProxyVarGet",
         "ApiGatewayMethodSongProxyVarGet"
       ]
-    },
-    "HelloLambdaPermissionApiGateway": {
-      "Type": "AWS::Lambda::Permission",
-      "Properties": {
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "HelloLambdaFunction",
-            "Arn"
-          ]
-        },
-        "Action": "lambda:InvokeFunction",
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": {
-          "Fn::Join": [
-            "",
-            [
-              "arn:",
-              {
-                "Ref": "AWS::Partition"
-              },
-              ":execute-api:",
-              {
-                "Ref": "AWS::Region"
-              },
-              ":",
-              {
-                "Ref": "AWS::AccountId"
-              },
-              ":",
-              {
-                "Ref": "ApiGatewayRestApi"
-              },
-              "/*/*"
-            ]
-          ]
-        }
-      }
-    },
-    "AuthLambdaPermissionApiGateway": {
-      "Type": "AWS::Lambda::Permission",
-      "Properties": {
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "AuthLambdaFunction",
-            "Arn"
-          ]
-        },
-        "Action": "lambda:InvokeFunction",
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": {
-          "Fn::Join": [
-            "",
-            [
-              "arn:",
-              {
-                "Ref": "AWS::Partition"
-              },
-              ":execute-api:",
-              {
-                "Ref": "AWS::Region"
-              },
-              ":",
-              {
-                "Ref": "AWS::AccountId"
-              },
-              ":",
-              {
-                "Ref": "ApiGatewayRestApi"
-              },
-              "/*/*"
-            ]
-          ]
-        }
-      }
     },
     "AppLambdaPermissionApiGateway": {
       "Type": "AWS::Lambda::Permission",
@@ -1701,6 +1497,191 @@
         "Enabled": true
       }
     },
+    "HttpApi": {
+      "Type": "AWS::ApiGatewayV2::Api",
+      "Properties": {
+        "Name": "dev-meusick-api-node",
+        "ProtocolType": "HTTP"
+      }
+    },
+    "HttpApiStage": {
+      "Type": "AWS::ApiGatewayV2::Stage",
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApi"
+        },
+        "StageName": "$default",
+        "AutoDeploy": true,
+        "DefaultRouteSettings": {
+          "DetailedMetricsEnabled": false
+        }
+      }
+    },
+    "S3fileLambdaPermissionHttpApi": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "S3fileLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "HttpApi"
+              },
+              "/*"
+            ]
+          ]
+        }
+      }
+    },
+    "HttpApiIntegrationS3file": {
+      "Type": "AWS::ApiGatewayV2::Integration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApi"
+        },
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": {
+          "Fn::GetAtt": [
+            "S3fileLambdaFunction",
+            "Arn"
+          ]
+        },
+        "PayloadFormatVersion": "2.0",
+        "TimeoutInMillis": 6500
+      }
+    },
+    "HttpApiRouteGetS3file": {
+      "Type": "AWS::ApiGatewayV2::Route",
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApi"
+        },
+        "RouteKey": "GET /s3file",
+        "Target": {
+          "Fn::Join": [
+            "/",
+            [
+              "integrations",
+              {
+                "Ref": "HttpApiIntegrationS3file"
+              }
+            ]
+          ]
+        }
+      },
+      "DependsOn": "HttpApiIntegrationS3file"
+    },
+    "S3fileIamRoleLambdaExecution": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "lambda.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ]
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": {
+              "Fn::Join": [
+                "-",
+                [
+                  "meusick-api-node",
+                  "dev",
+                  "lambda"
+                ]
+              ]
+            },
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:CreateLogStream",
+                    "logs:CreateLogGroup",
+                    "logs:PutLogEvents"
+                  ],
+                  "Resource": [
+                    {
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/meusick-api-node-dev-s3file:*:*"
+                    }
+                  ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:ListBucket"
+                  ],
+                  "Resource": "arn:aws:s3:::meusick-bucket"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject"
+                  ],
+                  "Resource": "arn:aws:s3:::meusick-bucket"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:ListObjects"
+                  ],
+                  "Resource": "arn:aws:s3:::meusick-bucket"
+                }
+              ]
+            }
+          }
+        ],
+        "Path": "/",
+        "RoleName": {
+          "Fn::Join": [
+            "-",
+            [
+              "meusick-api-node",
+              "dev",
+              "s3file",
+              {
+                "Ref": "AWS::Region"
+              },
+              "lambdaRole"
+            ]
+          ]
+        },
+        "ManagedPolicyArns": []
+      }
+    },
     "MyQueue": {
       "Type": "AWS::SQS::Queue",
       "Properties": {
@@ -1766,64 +1747,58 @@
         "Ref": "ServerlessDeploymentBucket"
       }
     },
-    "AuthLambdaFunctionQualifiedArn": {
-      "Description": "Current Lambda function version",
-      "Value": {
-        "Ref": "AuthLambdaVersionDF0TibXthrbe6ABE5rcAVZuqKSHmYS2U84DeZla8"
-      }
-    },
     "SqsUnderscorefunctionLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SqsUnderscorefunctionLambdaVersionSwFQ17W2plAhCl8CiLaAln8mTC7ijTfTTd3jYD9beM"
-      }
-    },
-    "HelloLambdaFunctionQualifiedArn": {
-      "Description": "Current Lambda function version",
-      "Value": {
-        "Ref": "HelloLambdaVersionc94Y2jL4XtN4uEDRSRSFSeNYyfiAVytLtirfiDlc"
+        "Ref": "SqsUnderscorefunctionLambdaVersionT8Ew6SKEHCYJVykvZtpDNB7reE3hmzotyI3xqJAY"
       }
     },
     "AppLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AppLambdaVersionIAuPsHqCZPvoUAMn2OsrbSCNlsDCy5EIaFEJLS70U"
+        "Ref": "AppLambdaVersionPUgFKeFLKwNzAQJ9Yi8IDXiXFcx546cJvLFPps4"
       }
     },
     "PostPlayLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "PostPlayLambdaVersionUPpUCp583eNjGuDULPkaPltmPxfd1bqjGdIH58XHo"
+        "Ref": "PostPlayLambdaVersioni6FY95Ly2RVAADJ1n6PBgUsXjIC2uWNCrcPDvgANU"
       }
     },
     "GetGenresLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetGenresLambdaVersionSky6iPcHfPHBvONe3sC67UYLL6e3uQJ1T6qTSWE9aBU"
+        "Ref": "GetGenresLambdaVersionmiYlQo6jjzbCm4WX0wrAC4akDOqJZdhg5m5Z5hC12w4"
       }
     },
     "GetArtistsByGenreLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetArtistsByGenreLambdaVersionv3Z9w3DDWECm942W9vf881jRJdZsUdhQrQxA2c2do"
+        "Ref": "GetArtistsByGenreLambdaVersionUMcIkW11oJ7XWqkXv6cFWtTKIaQpnGnClb6poM0zWM"
       }
     },
     "GetAlbumsByArtistLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetAlbumsByArtistLambdaVersion5MdEp1Vac8CgmpWvCGGCt1noLjkwKyST9cnGtMC0I"
+        "Ref": "GetAlbumsByArtistLambdaVersionKSP8LN5NA8opAY9Krob8vEMG3Icm1K7eg7XihbbLXkc"
       }
     },
     "GetSongsByAlbumLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetSongsByAlbumLambdaVersionevBpVIEq3oq31gxvX0vcsFiu0FRhizUlL5lguDazwyM"
+        "Ref": "GetSongsByAlbumLambdaVersionwXj9OYCI4iHzEhx2ue3rH9qj9EttwsEWYZNPhOUVXY"
       }
     },
     "GetSongLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetSongLambdaVersionPLRaVVPQL9YPmWf0sRiPeY1GiDreyg2VSzqehcGua4"
+        "Ref": "GetSongLambdaVersiondxgyCO9wswqXB0PTyelR6Ncf2NRtcBBxoihYRYzPJs"
+      }
+    },
+    "S3fileLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "S3fileLambdaVersionUFH4xmaDPK5aOjj0xn1hEEH9lntnmB8I52HSwRF3Kg0"
       }
     },
     "ServiceEndpoint": {
@@ -1845,6 +1820,34 @@
               "Ref": "AWS::URLSuffix"
             },
             "/dev"
+          ]
+        ]
+      }
+    },
+    "HttpApiId": {
+      "Description": "Id of the HTTP API",
+      "Value": {
+        "Ref": "HttpApi"
+      }
+    },
+    "HttpApiUrl": {
+      "Description": "URL of the HTTP API",
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "https://",
+            {
+              "Ref": "HttpApi"
+            },
+            ".execute-api.",
+            {
+              "Ref": "AWS::Region"
+            },
+            ".",
+            {
+              "Ref": "AWS::URLSuffix"
+            }
           ]
         ]
       }
