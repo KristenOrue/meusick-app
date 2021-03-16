@@ -150,11 +150,12 @@ app.get('/song/:song', function (req, res) {
   });
 })
 
-// Create play endpoint
+//Create play endpoint
 app.post('/play', function (req, res) {
   const params = {
     // TableName: MUSIC_TABLE,
-    MessageBody: JSON.stringify({
+    MessageBody: 
+    JSON.stringify({
       artist: req.body.artist,
       album: req.body.album,
       song: req.body.song
@@ -163,12 +164,45 @@ app.post('/play', function (req, res) {
   };
   sqsClient.sendMessage(params, function(err, data) {
     if (err) {
-      console.log("You done Fucked up", err); // an error occurred
+      console.log("Failed", err); // an error occurred
     } else {
-      console.log("Success", data.MessageId);
+      res.send({
+        "Success": true
+      });
     }           // successful response
   });
 })
+// app.post('/play', function (req, res) {
+//   if(!req.body.artist) {
+//     return res.status(400).send({
+//       success: 'false',
+//       message: 'Artist param missing'
+//     });
+//   } else if(!req.body.album) {
+//     return res.status(400).send({
+//       success: 'false',
+//       message: 'Album param missing'
+//     });
+//   } else if(!req.body.song) {
+//     return res.status(400).send({
+//       success: 'false',
+//       message: 'Song param missing'
+//     });
+//   }
+//  // const todo = {
+//  //   id: db.length + 1,
+//  //   title: req.body.title,
+//  //   description: req.body.description
+//  // }
+//  // db.push(todo);
+//  return res.status(201).send({
+//    success: 'true',
+//    message: 'Song happened. Hard.',
+//    // todo
+//  })
+// })
+
+
 //   dynamoDb.put(params, (error) => {
 //     if (error) {
 //       console.log(error);

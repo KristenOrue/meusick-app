@@ -44,7 +44,7 @@ functions:
   #   handler: auth.handler
 
   sqs_function:
-    handler: index.handler
+    handler: handlersqs.handler
     reservedConcurrency: 10 #Concurrency control
     events:
       - sqs:
