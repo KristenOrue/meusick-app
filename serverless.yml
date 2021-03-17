@@ -54,6 +54,7 @@ functions:
   app:
     handler: index.handler
     events:
+      # - http: ANY /{proxy+}
       - http: ANY /
       - http:
           method: ANY
@@ -90,11 +91,27 @@ functions:
     handler: index.handler
     events:
       - http: 'GET /genres'
+      # - http:
+      #     method: GET
+      #     path: /genres
+      #     cors: true
+      #     authorizer:
+      #       name: auth
+      #       type: request
+      #       identitySource: method.request.header.authorization
 
   getArtistsByGenre:
     handler: index.handler
     events:
       - http: 'GET /artists/for/genre/{proxy+}'
+      # - http:
+      #     path: /artists/for/genre/{proxy+}
+      #     method: GET
+      #     cors: true
+      #     authorizer:
+      #       name: auth
+      #       type: request
+      #       identitySource: method.request.header.authorization
 
   getAlbumsByArtist:
     handler: index.handler

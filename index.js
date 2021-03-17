@@ -1,5 +1,3 @@
-require('./auth')(app);
-
 const serverless = require('serverless-http');
 const bodyParser = require('body-parser');
 const express = require('express')
@@ -38,7 +36,7 @@ app.get('/', function (req, res) {
 })
 
 app.get('/genres', function (req, res) {
-  const auth = req.get("authorization");
+  const auth = req.get("Authorization");
   const params = {
     TableName: 'music',
     KeyConditionExpression: 'pk = :pk',
