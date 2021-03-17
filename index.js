@@ -1,3 +1,5 @@
+require('./auth')(app);
+
 const serverless = require('serverless-http');
 const bodyParser = require('body-parser');
 const express = require('express')
@@ -36,6 +38,7 @@ app.get('/', function (req, res) {
 })
 
 app.get('/genres', function (req, res) {
+  const auth = req.get("authorization");
   const params = {
     TableName: 'music',
     KeyConditionExpression: 'pk = :pk',
@@ -48,13 +51,15 @@ app.get('/genres', function (req, res) {
      else {
       console.log(data);
       res.send({
-        "Genre": data
+        "Genre": data,
+        auth,
       });
     }
   });
 })
 
 app.get('/artists/for/genre/:genre', function (req, res) {
+  const auth = req.get("authorization");
   const params = {
     TableName: 'music',
     KeyConditionExpression: 'pk = :pk and begins_with(sk, :sk)',
@@ -72,13 +77,15 @@ app.get('/artists/for/genre/:genre', function (req, res) {
         artists.push(item.info.artist);
       });
       res.send({
-        "Artists": artists
+        "Artists": artists,
+        auth,
       });
     }
   });
 })
 //albums BY Artist
 app.get('/albums/for/artist/:artist', function (req, res) {
+  const auth = req.get("authorization");
   const params = {
     TableName: 'music',
     KeyConditionExpression: 'pk = :pk and begins_with(sk, :sk)',
@@ -96,7 +103,8 @@ app.get('/albums/for/artist/:artist', function (req, res) {
         albums.push(item.info.albums);
       });
       res.send({
-        "Albums": albums
+        "Albums": albums,
+        auth,
       });
     }
   });
@@ -104,6 +112,7 @@ app.get('/albums/for/artist/:artist', function (req, res) {
 
 //Songs BY Album
 app.get('/songs/for/album/:album', function (req, res) {
+  const auth = req.get("authorization");
   const params = {
     TableName: 'music',
     KeyConditionExpression: 'pk = :pk and begins_with(sk, :sk)',
@@ -121,7 +130,8 @@ app.get('/songs/for/album/:album', function (req, res) {
         songs.push(item.info.song);
       });
       res.send({
-        "Songs": songs
+        "Songs": songs,
+        auth,
       });
     }
   });
@@ -129,6 +139,7 @@ app.get('/songs/for/album/:album', function (req, res) {
 
 //Songs BY Album
 app.get('/song/:song', function (req, res) {
+  const auth = res.get("authorization");
   const params = {
     TableName: 'music',
     KeyConditionExpression: 'pk = :pk and sk = :sk',
@@ -144,7 +155,8 @@ app.get('/song/:song', function (req, res) {
       var params = {Bucket: 'meusick-bucket', Key: data.Items[0].info.song};
       var url = s3.getSignedUrl('getObject', params);
       res.send({
-        "Song": url
+        "Song": url,
+        auth,
       });
     }
   });

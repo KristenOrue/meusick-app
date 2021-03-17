@@ -2,9 +2,9 @@ exports.handler = async (event) => {
     // Logging the event for debugging purposes
     console.log("event", JSON.stringify(event, null, 2));
     // Logging the event's headers authoirzation 
-    console.log("event.headers['Authorization']", event.headers["Authorization"]);
+    console.log("event.headers['authorization']", event.headers["authorization"]);
     //Token ID comes from the authorization
-    const tokenID = event.headers && event.headers["Authorization"];
+    const tokenID = event.headers && event.headers["authorization"];
     // If you can't find the token ID then log that, and generate a Polocy (FUNCTION BELOW) with an object that's just allow false  
     if (!tokenID) {
         console.log("Could not find a token on the event");
