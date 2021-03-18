@@ -90,43 +90,67 @@ functions:
   getGenres:
     handler: index.handler
     events:
-      - http: 'GET /genres'
-      # - http:
-      #     method: GET
-      #     path: /genres
-      #     cors: true
-      #     authorizer:
-      #       name: auth
-      #       type: request
-      #       identitySource: method.request.header.authorization
+      # - http: 'GET /genres'
+      - http:
+          method: GET
+          path: /genres
+          cors: true
+          authorizer:
+            name: auth
+            type: request
+            identitySource: method.request.header.authorization
 
   getArtistsByGenre:
     handler: index.handler
     events:
-      - http: 'GET /artists/for/genre/{proxy+}'
-      # - http:
-      #     path: /artists/for/genre/{proxy+}
-      #     method: GET
-      #     cors: true
-      #     authorizer:
-      #       name: auth
-      #       type: request
-      #       identitySource: method.request.header.authorization
+      # - http: 'GET /artists/for/genre/{proxy+}'
+      - http:
+          path: /artists/for/genre/{proxy+}
+          method: GET
+          cors: true
+          authorizer:
+            name: auth
+            type: request
+            identitySource: method.request.header.authorization
 
   getAlbumsByArtist:
     handler: index.handler
     events:
-      - http: 'GET /albums/for/artist/{proxy+}'
+      # - http: 'GET /albums/for/artist/{proxy+}'
+      - http:
+          path: /albums/for/artist/{proxy+}
+          method: GET
+          cors: true
+          authorizer:
+            name: auth
+            type: request
+            identitySource: method.request.header.authorization
 
   getSongsByAlbum:
     handler: index.handler
     events:
-      - http: 'GET /songs/for/album/{proxy+}'
+      # - http: 'GET /songs/for/album/{proxy+}'
+      - http:
+          path: /songs/for/album/{proxy+}
+          method: GET
+          cors: true
+          authorizer:
+            name: auth
+            type: request
+            identitySource: method.request.header.authorization
 
   getSong:
     handler: index.handler
     events: 
-      - http: 'GET /song/{proxy+}'
+      # - http: 'GET /song/{proxy+}'
+      - http:
+          path: /song/{proxy+}
+          method: GET
+          cors: true
+          authorizer:
+            name: auth
+            type: request
+            identitySource: method.request.header.authorization
 
 #Created for AW S3 & Servless:
   s3file:
