@@ -9,7 +9,7 @@ var s3 = new AWS.S3({signatureVersion: 'v4', region:"us-west-2"});
 
 const MUSIC_TABLE = process.env.MUSIC_TABLE;
 const IS_OFFLINE = process.env.IS_OFFLINE;
-// const QUEUE_URL = 'https://sqs.us-east-1.amazonaws.com/589772831734/MyQueue';
+const QUEUE_URL = 'arn:aws:sqs:us-east-1:589772831734:SQSqueue';
 const sqsClient = new AWS.SQS({region: 'us-east-1'});
 
 let dynamoDb;
