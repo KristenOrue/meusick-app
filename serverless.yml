@@ -1,8 +1,8 @@
-service: meusick-api-node
+service: meusick-api
 frameworkVersion: '2'
 
 custom:
-  tableName: 'music'
+  tableName: 'music-table'
   dynamodb:
     start:
       migrate: true
@@ -27,7 +27,6 @@ provider:
              
       Resource:
         - { "Fn::GetAtt": ["MusicDynamoDBTable", "Arn" ] }
-        - "arn:aws:sqs:us-east-1:589772831734:MyQueue"
   environment:
     MUSIC_TABLE: ${self:custom.tableName}
 
@@ -49,7 +48,7 @@ functions:
       - sqs:
           arn:
             Fn::GetAtt:
-              - MyQueue
+              - SQSqueue
               - Arn
   app:
     handler: index.handler
@@ -65,7 +64,7 @@ functions:
             type: request
             identitySource: method.request.header.authorization
 
-  postPlay:
+  post_play:
     handler: index.handler
     events:
       # - http: 'POST /play'
@@ -87,7 +86,7 @@ functions:
               - Access-Control-Request-Method
             allowCredentials: true
 
-  getGenres:
+  get_genres:
     handler: index.handler
     events:
       # - http: 'GET /genres'
@@ -100,7 +99,7 @@ functions:
             type: request
             identitySource: method.request.header.authorization
 
-  getArtistsByGenre:
+  get_artists_by_genre:
     handler: index.handler
     events:
       # - http: 'GET /artists/for/genre/{proxy+}'
@@ -113,7 +112,7 @@ functions:
             type: request
             identitySource: method.request.header.authorization
 
-  getAlbumsByArtist:
+  get_albums_by_artist:
     handler: index.handler
     events:
       # - http: 'GET /albums/for/artist/{proxy+}'
@@ -126,7 +125,7 @@ functions:
             type: request
             identitySource: method.request.header.authorization
 
-  getSongsByAlbum:
+  get_songs_by_album:
     handler: index.handler
     events:
       # - http: 'GET /songs/for/album/{proxy+}'
@@ -139,7 +138,7 @@ functions:
             type: request
             identitySource: method.request.header.authorization
 
-  getSong:
+  get_song:
     handler: index.handler
     events: 
       # - http: 'GET /song/{proxy+}'
@@ -153,7 +152,7 @@ functions:
             identitySource: method.request.header.authorization
 
 #Created for AW S3 & Servless:
-  s3file:
+  s3:
     handler: handlerS3.hello
     iamRoleStatements:
       - Effect: 'Allow'
@@ -179,10 +178,10 @@ functions:
 
 resources:
   Resources:
-    MyQueue:
+    SQSqueue:
       Type: "AWS::SQS::Queue"
       Properties:
-        QueueName: "MyQueue"
+        QueueName: "SQSqueue"
 
     MusicDynamoDBTable:
       Type: 'AWS::DynamoDB::Table'

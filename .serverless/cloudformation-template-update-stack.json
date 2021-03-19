@@ -74,61 +74,61 @@
     "AuthLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/meusick-api-node-dev-auth"
+        "LogGroupName": "/aws/lambda/meusick-api-dev-auth"
       }
     },
     "SqsUnderscorefunctionLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/meusick-api-node-dev-sqs_function"
+        "LogGroupName": "/aws/lambda/meusick-api-dev-sqs_function"
       }
     },
     "AppLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/meusick-api-node-dev-app"
+        "LogGroupName": "/aws/lambda/meusick-api-dev-app"
       }
     },
-    "PostPlayLogGroup": {
+    "PostUnderscoreplayLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/meusick-api-node-dev-postPlay"
+        "LogGroupName": "/aws/lambda/meusick-api-dev-post_play"
       }
     },
-    "GetGenresLogGroup": {
+    "GetUnderscoregenresLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/meusick-api-node-dev-getGenres"
+        "LogGroupName": "/aws/lambda/meusick-api-dev-get_genres"
       }
     },
-    "GetArtistsByGenreLogGroup": {
+    "GetUnderscoreartistsUnderscorebyUnderscoregenreLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/meusick-api-node-dev-getArtistsByGenre"
+        "LogGroupName": "/aws/lambda/meusick-api-dev-get_artists_by_genre"
       }
     },
-    "GetAlbumsByArtistLogGroup": {
+    "GetUnderscorealbumsUnderscorebyUnderscoreartistLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/meusick-api-node-dev-getAlbumsByArtist"
+        "LogGroupName": "/aws/lambda/meusick-api-dev-get_albums_by_artist"
       }
     },
-    "GetSongsByAlbumLogGroup": {
+    "GetUnderscoresongsUnderscorebyUnderscorealbumLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/meusick-api-node-dev-getSongsByAlbum"
+        "LogGroupName": "/aws/lambda/meusick-api-dev-get_songs_by_album"
       }
     },
-    "GetSongLogGroup": {
+    "GetUnderscoresongLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/meusick-api-node-dev-getSong"
+        "LogGroupName": "/aws/lambda/meusick-api-dev-get_song"
       }
     },
-    "S3fileLogGroup": {
+    "S3LogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/meusick-api-node-dev-s3file"
+        "LogGroupName": "/aws/lambda/meusick-api-dev-s3"
       }
     },
     "IamRoleLambdaExecution": {
@@ -156,7 +156,7 @@
               "Fn::Join": [
                 "-",
                 [
-                  "meusick-api-node",
+                  "meusick-api",
                   "dev",
                   "lambda"
                 ]
@@ -173,7 +173,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/meusick-api-node-dev*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/meusick-api-dev*:*"
                     }
                   ]
                 },
@@ -184,7 +184,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/meusick-api-node-dev*:*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/meusick-api-dev*:*:*"
                     }
                   ]
                 },
@@ -208,8 +208,7 @@
                         "MusicDynamoDBTable",
                         "Arn"
                       ]
-                    },
-                    "arn:aws:sqs:us-east-1:589772831734:MyQueue"
+                    }
                   ]
                 },
                 {
@@ -222,7 +221,7 @@
                   "Resource": [
                     {
                       "Fn::GetAtt": [
-                        "MyQueue",
+                        "SQSqueue",
                         "Arn"
                       ]
                     }
@@ -237,7 +236,7 @@
           "Fn::Join": [
             "-",
             [
-              "meusick-api-node",
+              "meusick-api",
               "dev",
               {
                 "Ref": "AWS::Region"
@@ -255,16 +254,16 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1616030326094-2021-03-18T01:18:46.094Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api/dev/1616128232371-2021-03-19T04:30:32.371Z/meusick-api.zip"
         },
         "Handler": "auth.handler",
         "Runtime": "nodejs12.x",
-        "FunctionName": "meusick-api-node-dev-auth",
+        "FunctionName": "meusick-api-dev-auth",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MUSIC_TABLE": "music",
+            "MUSIC_TABLE": "music-table",
             "SERVERLESS_EXPRESS_PLATFORM": "aws"
           }
         },
@@ -286,16 +285,16 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1616030326094-2021-03-18T01:18:46.094Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api/dev/1616128232371-2021-03-19T04:30:32.371Z/meusick-api.zip"
         },
         "Handler": "handlersqs.handler",
         "Runtime": "nodejs12.x",
-        "FunctionName": "meusick-api-node-dev-sqs_function",
+        "FunctionName": "meusick-api-dev-sqs_function",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MUSIC_TABLE": "music",
+            "MUSIC_TABLE": "music-table",
             "SERVERLESS_EXPRESS_PLATFORM": "aws"
           }
         },
@@ -318,16 +317,16 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1616030326094-2021-03-18T01:18:46.094Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api/dev/1616128232371-2021-03-19T04:30:32.371Z/meusick-api.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
-        "FunctionName": "meusick-api-node-dev-app",
+        "FunctionName": "meusick-api-dev-app",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MUSIC_TABLE": "music",
+            "MUSIC_TABLE": "music-table",
             "SERVERLESS_EXPRESS_PLATFORM": "aws"
           }
         },
@@ -342,23 +341,23 @@
         "AppLogGroup"
       ]
     },
-    "PostPlayLambdaFunction": {
+    "PostUnderscoreplayLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1616030326094-2021-03-18T01:18:46.094Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api/dev/1616128232371-2021-03-19T04:30:32.371Z/meusick-api.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
-        "FunctionName": "meusick-api-node-dev-postPlay",
+        "FunctionName": "meusick-api-dev-post_play",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MUSIC_TABLE": "music",
+            "MUSIC_TABLE": "music-table",
             "SERVERLESS_EXPRESS_PLATFORM": "aws"
           }
         },
@@ -370,26 +369,26 @@
         }
       },
       "DependsOn": [
-        "PostPlayLogGroup"
+        "PostUnderscoreplayLogGroup"
       ]
     },
-    "GetGenresLambdaFunction": {
+    "GetUnderscoregenresLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1616030326094-2021-03-18T01:18:46.094Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api/dev/1616128232371-2021-03-19T04:30:32.371Z/meusick-api.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
-        "FunctionName": "meusick-api-node-dev-getGenres",
+        "FunctionName": "meusick-api-dev-get_genres",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MUSIC_TABLE": "music",
+            "MUSIC_TABLE": "music-table",
             "SERVERLESS_EXPRESS_PLATFORM": "aws"
           }
         },
@@ -401,26 +400,26 @@
         }
       },
       "DependsOn": [
-        "GetGenresLogGroup"
+        "GetUnderscoregenresLogGroup"
       ]
     },
-    "GetArtistsByGenreLambdaFunction": {
+    "GetUnderscoreartistsUnderscorebyUnderscoregenreLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1616030326094-2021-03-18T01:18:46.094Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api/dev/1616128232371-2021-03-19T04:30:32.371Z/meusick-api.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
-        "FunctionName": "meusick-api-node-dev-getArtistsByGenre",
+        "FunctionName": "meusick-api-dev-get_artists_by_genre",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MUSIC_TABLE": "music",
+            "MUSIC_TABLE": "music-table",
             "SERVERLESS_EXPRESS_PLATFORM": "aws"
           }
         },
@@ -432,26 +431,26 @@
         }
       },
       "DependsOn": [
-        "GetArtistsByGenreLogGroup"
+        "GetUnderscoreartistsUnderscorebyUnderscoregenreLogGroup"
       ]
     },
-    "GetAlbumsByArtistLambdaFunction": {
+    "GetUnderscorealbumsUnderscorebyUnderscoreartistLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1616030326094-2021-03-18T01:18:46.094Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api/dev/1616128232371-2021-03-19T04:30:32.371Z/meusick-api.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
-        "FunctionName": "meusick-api-node-dev-getAlbumsByArtist",
+        "FunctionName": "meusick-api-dev-get_albums_by_artist",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MUSIC_TABLE": "music",
+            "MUSIC_TABLE": "music-table",
             "SERVERLESS_EXPRESS_PLATFORM": "aws"
           }
         },
@@ -463,26 +462,26 @@
         }
       },
       "DependsOn": [
-        "GetAlbumsByArtistLogGroup"
+        "GetUnderscorealbumsUnderscorebyUnderscoreartistLogGroup"
       ]
     },
-    "GetSongsByAlbumLambdaFunction": {
+    "GetUnderscoresongsUnderscorebyUnderscorealbumLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1616030326094-2021-03-18T01:18:46.094Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api/dev/1616128232371-2021-03-19T04:30:32.371Z/meusick-api.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
-        "FunctionName": "meusick-api-node-dev-getSongsByAlbum",
+        "FunctionName": "meusick-api-dev-get_songs_by_album",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MUSIC_TABLE": "music",
+            "MUSIC_TABLE": "music-table",
             "SERVERLESS_EXPRESS_PLATFORM": "aws"
           }
         },
@@ -494,26 +493,26 @@
         }
       },
       "DependsOn": [
-        "GetSongsByAlbumLogGroup"
+        "GetUnderscoresongsUnderscorebyUnderscorealbumLogGroup"
       ]
     },
-    "GetSongLambdaFunction": {
+    "GetUnderscoresongLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1616030326094-2021-03-18T01:18:46.094Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api/dev/1616128232371-2021-03-19T04:30:32.371Z/meusick-api.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs12.x",
-        "FunctionName": "meusick-api-node-dev-getSong",
+        "FunctionName": "meusick-api-dev-get_song",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MUSIC_TABLE": "music",
+            "MUSIC_TABLE": "music-table",
             "SERVERLESS_EXPRESS_PLATFORM": "aws"
           }
         },
@@ -525,145 +524,145 @@
         }
       },
       "DependsOn": [
-        "GetSongLogGroup"
+        "GetUnderscoresongLogGroup"
       ]
     },
-    "S3fileLambdaFunction": {
+    "S3LambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/meusick-api-node/dev/1616030326094-2021-03-18T01:18:46.094Z/meusick-api-node.zip"
+          "S3Key": "serverless/meusick-api/dev/1616128232371-2021-03-19T04:30:32.371Z/meusick-api.zip"
         },
         "Handler": "handlerS3.hello",
         "Runtime": "nodejs12.x",
-        "FunctionName": "meusick-api-node-dev-s3file",
+        "FunctionName": "meusick-api-dev-s3",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MUSIC_TABLE": "music",
+            "MUSIC_TABLE": "music-table",
             "SERVERLESS_EXPRESS_PLATFORM": "aws"
           }
         },
         "Role": {
           "Fn::GetAtt": [
-            "S3fileIamRoleLambdaExecution",
+            "S3IamRoleLambdaExecution",
             "Arn"
           ]
         }
       },
       "DependsOn": [
-        "S3fileIamRoleLambdaExecution",
-        "S3fileLogGroup"
+        "S3IamRoleLambdaExecution",
+        "S3LogGroup"
       ]
     },
-    "AuthLambdaVersiontBM5n4WvRnGVK51ROQSEzvLHpitYYL8eoOrtd1AzdI": {
+    "AuthLambdaVersionhJv7KgxI5Fjl5jYfmtxTN7dJ8maqytUbc43vxXfo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AuthLambdaFunction"
         },
-        "CodeSha256": "AnGR+rK/qq+ZlPb2Oho5HagoTFanyPfU2poK/jq7cHA="
+        "CodeSha256": "EHQxpBYLNrDai1NC2m3nC0oFI4OUkR57hXnJXmtNwJs="
       }
     },
-    "SqsUnderscorefunctionLambdaVersionC1sUZ4WnQMBfDuyTVxwZJFAeoWWwlyp6IxTXiAkAqFg": {
+    "SqsUnderscorefunctionLambdaVersioniU7VuZHLbyjqWM3kLfLaxWf2MKNVa3O7XVctu5MTDc": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SqsUnderscorefunctionLambdaFunction"
         },
-        "CodeSha256": "AnGR+rK/qq+ZlPb2Oho5HagoTFanyPfU2poK/jq7cHA="
+        "CodeSha256": "EHQxpBYLNrDai1NC2m3nC0oFI4OUkR57hXnJXmtNwJs="
       }
     },
-    "AppLambdaVersionKZwLUfu3LnfPzgkzxzxS0nbWzpkqf85LQYsxeDA20": {
+    "AppLambdaVersionhmG21ZYdlXUk9Xg6Z9q0MT2xDYvXne4sjaOC4Qow4Q": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AppLambdaFunction"
         },
-        "CodeSha256": "AnGR+rK/qq+ZlPb2Oho5HagoTFanyPfU2poK/jq7cHA="
+        "CodeSha256": "EHQxpBYLNrDai1NC2m3nC0oFI4OUkR57hXnJXmtNwJs="
       }
     },
-    "PostPlayLambdaVersionp4ayNCbyjRY88MvPMJsggKIdIKOPLD0tKSCdMbIqmZw": {
+    "PostUnderscoreplayLambdaVersionznDoCJRYG6UOf3LWAeoTpKEdEOqRTb2GHTk3SRiMPEE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
-          "Ref": "PostPlayLambdaFunction"
+          "Ref": "PostUnderscoreplayLambdaFunction"
         },
-        "CodeSha256": "AnGR+rK/qq+ZlPb2Oho5HagoTFanyPfU2poK/jq7cHA="
+        "CodeSha256": "EHQxpBYLNrDai1NC2m3nC0oFI4OUkR57hXnJXmtNwJs="
       }
     },
-    "GetGenresLambdaVersionjULYrqS8Lu0emEpPODJVU5aQ5DBILEfsRsCJwJmcw": {
+    "GetUnderscoregenresLambdaVersionk8WcbF96rdmAVPugvIeFabpIMOmNHHmdkzCnGA6ihk": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
-          "Ref": "GetGenresLambdaFunction"
+          "Ref": "GetUnderscoregenresLambdaFunction"
         },
-        "CodeSha256": "AnGR+rK/qq+ZlPb2Oho5HagoTFanyPfU2poK/jq7cHA="
+        "CodeSha256": "EHQxpBYLNrDai1NC2m3nC0oFI4OUkR57hXnJXmtNwJs="
       }
     },
-    "GetArtistsByGenreLambdaVersion44sGQO3b4ijothibPgrsOrHgtgjMCN4JKnYZpw5wqM": {
+    "GetUnderscoreartistsUnderscorebyUnderscoregenreLambdaVersionyd2DzG1Tr60EHZ8XfnPr1TajHhuh8IATA8Z7W2ycELg": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
-          "Ref": "GetArtistsByGenreLambdaFunction"
+          "Ref": "GetUnderscoreartistsUnderscorebyUnderscoregenreLambdaFunction"
         },
-        "CodeSha256": "AnGR+rK/qq+ZlPb2Oho5HagoTFanyPfU2poK/jq7cHA="
+        "CodeSha256": "EHQxpBYLNrDai1NC2m3nC0oFI4OUkR57hXnJXmtNwJs="
       }
     },
-    "GetAlbumsByArtistLambdaVersiontadoiKwN3YYD9IIC04VzMoNTWDlbrj039LpG3fyvR0": {
+    "GetUnderscorealbumsUnderscorebyUnderscoreartistLambdaVersionrM5OifPHjW8Dw6POazFy4XbRQcwousEuDA3lob7YJQo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
-          "Ref": "GetAlbumsByArtistLambdaFunction"
+          "Ref": "GetUnderscorealbumsUnderscorebyUnderscoreartistLambdaFunction"
         },
-        "CodeSha256": "AnGR+rK/qq+ZlPb2Oho5HagoTFanyPfU2poK/jq7cHA="
+        "CodeSha256": "EHQxpBYLNrDai1NC2m3nC0oFI4OUkR57hXnJXmtNwJs="
       }
     },
-    "GetSongsByAlbumLambdaVersionTquVka4pvjwl3Az0Qe1K0j4o6vMoKAFlw3e119VBnhk": {
+    "GetUnderscoresongsUnderscorebyUnderscorealbumLambdaVersionhlCAiVRMRm4xftY3q6PJE07ORCLlXkNhxsotFB14": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
-          "Ref": "GetSongsByAlbumLambdaFunction"
+          "Ref": "GetUnderscoresongsUnderscorebyUnderscorealbumLambdaFunction"
         },
-        "CodeSha256": "AnGR+rK/qq+ZlPb2Oho5HagoTFanyPfU2poK/jq7cHA="
+        "CodeSha256": "EHQxpBYLNrDai1NC2m3nC0oFI4OUkR57hXnJXmtNwJs="
       }
     },
-    "GetSongLambdaVersionmDMF4SkdDk02CoMxRqYuzJCU8xKkVsAr8WiZ279vPYY": {
+    "GetUnderscoresongLambdaVersionMIVPbKChu2CaTpPBFsqqXUlGF2fSwNWzahp5F6dbmsQ": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
-          "Ref": "GetSongLambdaFunction"
+          "Ref": "GetUnderscoresongLambdaFunction"
         },
-        "CodeSha256": "AnGR+rK/qq+ZlPb2Oho5HagoTFanyPfU2poK/jq7cHA="
+        "CodeSha256": "EHQxpBYLNrDai1NC2m3nC0oFI4OUkR57hXnJXmtNwJs="
       }
     },
-    "S3fileLambdaVersiony3QVEMCDxojXOPKBd9Mh79GcwGSmevp6D05V29rAE": {
+    "S3LambdaVersionJcfJhNvii4hBmHIOvQ6u80Gyv5QJn88GNjokevj0rW0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
-          "Ref": "S3fileLambdaFunction"
+          "Ref": "S3LambdaFunction"
         },
-        "CodeSha256": "AnGR+rK/qq+ZlPb2Oho5HagoTFanyPfU2poK/jq7cHA="
+        "CodeSha256": "EHQxpBYLNrDai1NC2m3nC0oFI4OUkR57hXnJXmtNwJs="
       }
     },
     "ApiGatewayRestApi": {
       "Type": "AWS::ApiGateway::RestApi",
       "Properties": {
-        "Name": "dev-meusick-api-node",
+        "Name": "dev-meusick-api",
         "EndpointConfiguration": {
           "Types": [
             "EDGE"
@@ -1338,7 +1337,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "PostPlayLambdaFunction",
+                    "PostUnderscoreplayLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -1384,7 +1383,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "GetGenresLambdaFunction",
+                    "GetUnderscoregenresLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -1431,7 +1430,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "GetArtistsByGenreLambdaFunction",
+                    "GetUnderscoreartistsUnderscorebyUnderscoregenreLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -1478,7 +1477,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "GetAlbumsByArtistLambdaFunction",
+                    "GetUnderscorealbumsUnderscorebyUnderscoreartistLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -1525,7 +1524,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "GetSongsByAlbumLambdaFunction",
+                    "GetUnderscoresongsUnderscorebyUnderscorealbumLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -1572,7 +1571,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "GetSongLambdaFunction",
+                    "GetUnderscoresongLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -1620,7 +1619,7 @@
         "Type": "REQUEST"
       }
     },
-    "ApiGatewayDeployment1616030302448": {
+    "ApiGatewayDeployment1616128200609": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1720,12 +1719,12 @@
         }
       }
     },
-    "PostPlayLambdaPermissionApiGateway": {
+    "PostUnderscoreplayLambdaPermissionApiGateway": {
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "FunctionName": {
           "Fn::GetAtt": [
-            "PostPlayLambdaFunction",
+            "PostUnderscoreplayLambdaFunction",
             "Arn"
           ]
         },
@@ -1757,12 +1756,12 @@
         }
       }
     },
-    "GetGenresLambdaPermissionApiGateway": {
+    "GetUnderscoregenresLambdaPermissionApiGateway": {
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "FunctionName": {
           "Fn::GetAtt": [
-            "GetGenresLambdaFunction",
+            "GetUnderscoregenresLambdaFunction",
             "Arn"
           ]
         },
@@ -1794,12 +1793,12 @@
         }
       }
     },
-    "GetArtistsByGenreLambdaPermissionApiGateway": {
+    "GetUnderscoreartistsUnderscorebyUnderscoregenreLambdaPermissionApiGateway": {
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "FunctionName": {
           "Fn::GetAtt": [
-            "GetArtistsByGenreLambdaFunction",
+            "GetUnderscoreartistsUnderscorebyUnderscoregenreLambdaFunction",
             "Arn"
           ]
         },
@@ -1831,12 +1830,12 @@
         }
       }
     },
-    "GetAlbumsByArtistLambdaPermissionApiGateway": {
+    "GetUnderscorealbumsUnderscorebyUnderscoreartistLambdaPermissionApiGateway": {
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "FunctionName": {
           "Fn::GetAtt": [
-            "GetAlbumsByArtistLambdaFunction",
+            "GetUnderscorealbumsUnderscorebyUnderscoreartistLambdaFunction",
             "Arn"
           ]
         },
@@ -1868,12 +1867,12 @@
         }
       }
     },
-    "GetSongsByAlbumLambdaPermissionApiGateway": {
+    "GetUnderscoresongsUnderscorebyUnderscorealbumLambdaPermissionApiGateway": {
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "FunctionName": {
           "Fn::GetAtt": [
-            "GetSongsByAlbumLambdaFunction",
+            "GetUnderscoresongsUnderscorebyUnderscorealbumLambdaFunction",
             "Arn"
           ]
         },
@@ -1905,12 +1904,12 @@
         }
       }
     },
-    "GetSongLambdaPermissionApiGateway": {
+    "GetUnderscoresongLambdaPermissionApiGateway": {
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "FunctionName": {
           "Fn::GetAtt": [
-            "GetSongLambdaFunction",
+            "GetUnderscoresongLambdaFunction",
             "Arn"
           ]
         },
@@ -1942,7 +1941,7 @@
         }
       }
     },
-    "SqsUnderscorefunctionEventSourceMappingSQSMyQueue": {
+    "SqsUnderscorefunctionEventSourceMappingSQSSQSqueue": {
       "Type": "AWS::Lambda::EventSourceMapping",
       "DependsOn": [
         "IamRoleLambdaExecution"
@@ -1951,7 +1950,7 @@
         "BatchSize": 10,
         "EventSourceArn": {
           "Fn::GetAtt": [
-            "MyQueue",
+            "SQSqueue",
             "Arn"
           ]
         },
@@ -1967,7 +1966,7 @@
     "HttpApi": {
       "Type": "AWS::ApiGatewayV2::Api",
       "Properties": {
-        "Name": "dev-meusick-api-node",
+        "Name": "dev-meusick-api",
         "ProtocolType": "HTTP"
       }
     },
@@ -1984,12 +1983,12 @@
         }
       }
     },
-    "S3fileLambdaPermissionHttpApi": {
+    "S3LambdaPermissionHttpApi": {
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "FunctionName": {
           "Fn::GetAtt": [
-            "S3fileLambdaFunction",
+            "S3LambdaFunction",
             "Arn"
           ]
         },
@@ -2021,7 +2020,7 @@
         }
       }
     },
-    "HttpApiIntegrationS3file": {
+    "HttpApiIntegrationS3": {
       "Type": "AWS::ApiGatewayV2::Integration",
       "Properties": {
         "ApiId": {
@@ -2030,7 +2029,7 @@
         "IntegrationType": "AWS_PROXY",
         "IntegrationUri": {
           "Fn::GetAtt": [
-            "S3fileLambdaFunction",
+            "S3LambdaFunction",
             "Arn"
           ]
         },
@@ -2051,15 +2050,15 @@
             [
               "integrations",
               {
-                "Ref": "HttpApiIntegrationS3file"
+                "Ref": "HttpApiIntegrationS3"
               }
             ]
           ]
         }
       },
-      "DependsOn": "HttpApiIntegrationS3file"
+      "DependsOn": "HttpApiIntegrationS3"
     },
-    "S3fileIamRoleLambdaExecution": {
+    "S3IamRoleLambdaExecution": {
       "Type": "AWS::IAM::Role",
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -2084,7 +2083,7 @@
               "Fn::Join": [
                 "-",
                 [
-                  "meusick-api-node",
+                  "meusick-api",
                   "dev",
                   "lambda"
                 ]
@@ -2102,7 +2101,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/meusick-api-node-dev-s3file:*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/meusick-api-dev-s3:*:*"
                     }
                   ]
                 },
@@ -2136,9 +2135,9 @@
           "Fn::Join": [
             "-",
             [
-              "meusick-api-node",
+              "meusick-api",
               "dev",
-              "s3file",
+              "s3",
               {
                 "Ref": "AWS::Region"
               },
@@ -2149,10 +2148,10 @@
         "ManagedPolicyArns": []
       }
     },
-    "MyQueue": {
+    "SQSqueue": {
       "Type": "AWS::SQS::Queue",
       "Properties": {
-        "QueueName": "MyQueue"
+        "QueueName": "SQSqueue"
       }
     },
     "MusicDynamoDBTable": {
@@ -2182,7 +2181,7 @@
           "ReadCapacityUnits": 1,
           "WriteCapacityUnits": 1
         },
-        "TableName": "music",
+        "TableName": "music-table",
         "GlobalSecondaryIndexes": [
           {
             "IndexName": "by_sk",
@@ -2217,61 +2216,61 @@
     "AuthLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AuthLambdaVersiontBM5n4WvRnGVK51ROQSEzvLHpitYYL8eoOrtd1AzdI"
+        "Ref": "AuthLambdaVersionhJv7KgxI5Fjl5jYfmtxTN7dJ8maqytUbc43vxXfo"
       }
     },
     "SqsUnderscorefunctionLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SqsUnderscorefunctionLambdaVersionC1sUZ4WnQMBfDuyTVxwZJFAeoWWwlyp6IxTXiAkAqFg"
+        "Ref": "SqsUnderscorefunctionLambdaVersioniU7VuZHLbyjqWM3kLfLaxWf2MKNVa3O7XVctu5MTDc"
       }
     },
     "AppLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AppLambdaVersionKZwLUfu3LnfPzgkzxzxS0nbWzpkqf85LQYsxeDA20"
+        "Ref": "AppLambdaVersionhmG21ZYdlXUk9Xg6Z9q0MT2xDYvXne4sjaOC4Qow4Q"
       }
     },
-    "PostPlayLambdaFunctionQualifiedArn": {
+    "PostUnderscoreplayLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "PostPlayLambdaVersionp4ayNCbyjRY88MvPMJsggKIdIKOPLD0tKSCdMbIqmZw"
+        "Ref": "PostUnderscoreplayLambdaVersionznDoCJRYG6UOf3LWAeoTpKEdEOqRTb2GHTk3SRiMPEE"
       }
     },
-    "GetGenresLambdaFunctionQualifiedArn": {
+    "GetUnderscoregenresLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetGenresLambdaVersionjULYrqS8Lu0emEpPODJVU5aQ5DBILEfsRsCJwJmcw"
+        "Ref": "GetUnderscoregenresLambdaVersionk8WcbF96rdmAVPugvIeFabpIMOmNHHmdkzCnGA6ihk"
       }
     },
-    "GetArtistsByGenreLambdaFunctionQualifiedArn": {
+    "GetUnderscoreartistsUnderscorebyUnderscoregenreLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetArtistsByGenreLambdaVersion44sGQO3b4ijothibPgrsOrHgtgjMCN4JKnYZpw5wqM"
+        "Ref": "GetUnderscoreartistsUnderscorebyUnderscoregenreLambdaVersionyd2DzG1Tr60EHZ8XfnPr1TajHhuh8IATA8Z7W2ycELg"
       }
     },
-    "GetAlbumsByArtistLambdaFunctionQualifiedArn": {
+    "GetUnderscorealbumsUnderscorebyUnderscoreartistLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetAlbumsByArtistLambdaVersiontadoiKwN3YYD9IIC04VzMoNTWDlbrj039LpG3fyvR0"
+        "Ref": "GetUnderscorealbumsUnderscorebyUnderscoreartistLambdaVersionrM5OifPHjW8Dw6POazFy4XbRQcwousEuDA3lob7YJQo"
       }
     },
-    "GetSongsByAlbumLambdaFunctionQualifiedArn": {
+    "GetUnderscoresongsUnderscorebyUnderscorealbumLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetSongsByAlbumLambdaVersionTquVka4pvjwl3Az0Qe1K0j4o6vMoKAFlw3e119VBnhk"
+        "Ref": "GetUnderscoresongsUnderscorebyUnderscorealbumLambdaVersionhlCAiVRMRm4xftY3q6PJE07ORCLlXkNhxsotFB14"
       }
     },
-    "GetSongLambdaFunctionQualifiedArn": {
+    "GetUnderscoresongLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetSongLambdaVersionmDMF4SkdDk02CoMxRqYuzJCU8xKkVsAr8WiZ279vPYY"
+        "Ref": "GetUnderscoresongLambdaVersionMIVPbKChu2CaTpPBFsqqXUlGF2fSwNWzahp5F6dbmsQ"
       }
     },
-    "S3fileLambdaFunctionQualifiedArn": {
+    "S3LambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "S3fileLambdaVersiony3QVEMCDxojXOPKBd9Mh79GcwGSmevp6D05V29rAE"
+        "Ref": "S3LambdaVersionJcfJhNvii4hBmHIOvQ6u80Gyv5QJn88GNjokevj0rW0"
       }
     },
     "ServiceEndpoint": {

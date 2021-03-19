@@ -9,7 +9,7 @@ var s3 = new AWS.S3({signatureVersion: 'v4', region:"us-west-2"});
 
 const MUSIC_TABLE = process.env.MUSIC_TABLE;
 const IS_OFFLINE = process.env.IS_OFFLINE;
-const QUEUE_URL = 'https://sqs.us-east-1.amazonaws.com/589772831734/MyQueue';
+// const QUEUE_URL = 'https://sqs.us-east-1.amazonaws.com/589772831734/MyQueue';
 const sqsClient = new AWS.SQS({region: 'us-east-1'});
 
 let dynamoDb;
@@ -38,7 +38,7 @@ app.get('/', function (req, res) {
 app.get('/genres', function (req, res) {
   const auth = req.get("Authorization");
   const params = {
-    TableName: 'music',
+    TableName: 'music-table',
     KeyConditionExpression: 'pk = :pk',
     ExpressionAttributeValues: {
       ':pk': "genre"
@@ -59,7 +59,7 @@ app.get('/genres', function (req, res) {
 app.get('/artists/for/genre/:genre', function (req, res) {
   const auth = req.get("authorization");
   const params = {
-    TableName: 'music',
+    TableName: 'music-table',
     KeyConditionExpression: 'pk = :pk and begins_with(sk, :sk)',
     ExpressionAttributeValues: {
       ':pk': "genre#" + req.params.genre,
@@ -85,7 +85,7 @@ app.get('/artists/for/genre/:genre', function (req, res) {
 app.get('/albums/for/artist/:artist', function (req, res) {
   const auth = req.get("authorization");
   const params = {
-    TableName: 'music',
+    TableName: 'music-table',
     KeyConditionExpression: 'pk = :pk and begins_with(sk, :sk)',
     ExpressionAttributeValues: {
       ':pk': "artist#" + req.params.artist,
@@ -112,7 +112,7 @@ app.get('/albums/for/artist/:artist', function (req, res) {
 app.get('/songs/for/album/:album', function (req, res) {
   const auth = req.get("authorization");
   const params = {
-    TableName: 'music',
+    TableName: 'music-table',
     KeyConditionExpression: 'pk = :pk and begins_with(sk, :sk)',
     ExpressionAttributeValues: {
       ':pk': "album#" + req.params.album,
@@ -139,7 +139,7 @@ app.get('/songs/for/album/:album', function (req, res) {
 app.get('/song/:song', function (req, res) {
   const auth = res.get("authorization");
   const params = {
-    TableName: 'music',
+    TableName: 'music-table',
     KeyConditionExpression: 'pk = :pk and sk = :sk',
     ExpressionAttributeValues: {
       ':pk': "song",
